@@ -9,24 +9,23 @@ BEGIN {
     use Excel::Template::Container;
 }
 
+sub exit_scope  { $_[1]->active_worksheet( undef ) }
+
 sub render
 {
     my $self = shift;
     my ($context) = @_;
 
-    $context->new_worksheet( $self );
+    my $worksheet = $context->new_worksheet( $self );
 
     my $password = $context->get( $self, 'PROTECT' );
     if (defined $password)
     {
-        $context->active_worksheet->protect( $password );
+        $worksheet->protect( $password );
     }
 
-    my $keep_zeros = $context->get( $self, 'KEEP_LEADING_ZEROS' );
-    if ( defined $keep_zeros )
-    {
-        $context->active_worksheet->keep_leading_zeros( $keep_zeros ? 1 : 0 );
-    }
+    $worksheet->keep_leading_zeros( 1 )
+        if $context->mark( 'keep_leading_zeros' );
 
     return $self->SUPER::render($context);
 }

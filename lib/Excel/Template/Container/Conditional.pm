@@ -53,7 +53,7 @@ sub _conditional_passes
             /^ge$/ && do { $res = ($val ge $value); last };
             /^le$/ && do { $res = ($val le $value); last };
 
-            die "Unknown operator in conditional resolve", $/;
+            die "Unknown operator '$op' in conditional resolve", $/;
         }
 
         return $res && 1;
@@ -124,7 +124,7 @@ IF
 
 =head1 INHERITANCE
 
-Excel::Template::Container
+L<CONTAINER|Excel::Template::Container>
 
 =head1 ATTRIBUTES
 
@@ -132,24 +132,21 @@ Excel::Template::Container
 
 =item * NAME
 
-This is the name of the parameter to be testing. It is resolved like any other
-parameter. 
+This is the name of the parameter to test. It is resolved like any other parameter name. (q.v. L<VAR|Excel::Template::Element::Var> for more info.)
 
 =item * VALUE
 
-If VALUE is set, then a comparison operation is done. The value of NAME is
-compared to VALUE using the value of OP.
+If VALUE is set, then a comparison operation is done. The value of NAME is compared to VALUE using the value of OP.
 
 =item * OP
 
-If VALUE is set, then this is checked. If it isn't present, then '==' (numeric
-equality) is assumed. OP must be one of the numeric comparison operators or the
-string comparison operators. All 6 of each kind is supported.
+If VALUE is set, then this is checked. If it isn't present, then '==' (numeric equality) is assumed. OP must be one of Perl the numeric comparison operators or the string comparison operators. All 6 of each kind is supported.
+
+B<Note>: If you want to use < or <=, you must instead use &lt; or &lt;=. This is to make sure it will parse with L<XML::Parser>. You should not need to use &gt; or &gt;= instead of > and >=, respectively.
 
 =item * IS
 
-If VALUE is not set, then IS is checked. IS is allowed to be either "TRUE" or
-"FALSE". The boolean value of NAME is checked against IS.
+If VALUE is not set, then IS is checked. IS is allowed to be either "TRUE" or "FALSE". The boolean value of NAME is checked against IS.
 
 =back
 
@@ -171,8 +168,7 @@ None
     ... Children here
   </if>
 
-In the above example, the children will be executed if the value of __ODD__
-(which is set by the LOOP node) is false. So, for all even iterations.
+In the above example, the children will be executed if the value of __ODD__ (which is set by the L<LOOP|Excel::Template::Container::Loop> node) is false. So, for all even iterations.
 
 =head1 AUTHOR
 
@@ -180,6 +176,6 @@ Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
-LOOP
+L<LOOP|Excel::Template::Container::Loop>, L<VAR|Excel::Template::Element::Var>
 
 =cut

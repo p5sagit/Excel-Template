@@ -18,6 +18,7 @@ lib/Excel/Template/Container/Conditional.pm
 lib/Excel/Template/Container/Format.pm
 lib/Excel/Template/Container/Hidden.pm
 lib/Excel/Template/Container/Italic.pm
+lib/Excel/Template/Container/KeepLeadingZeros.pm
 lib/Excel/Template/Container/Loop.pm
 lib/Excel/Template/Container/Locked.pm
 lib/Excel/Template/Container/Outline.pm
@@ -67,6 +68,8 @@ t/017_filehandle.t
 t/018_register.t
 t/019_output.t
 t/020_worksheet_attributes.t
+t/021_loop_error.t
+t/022_keep_leading_zeros.t
 t/998_pod.t
 t/999_pod_coverage.t
 t/mock.pm

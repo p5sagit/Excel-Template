@@ -22,14 +22,13 @@ Spreadsheet::WriteExcel::new( 'filename' )
 Spreadsheet::WriteExcel::add_format( '' )
 Spreadsheet::WriteExcel::add_worksheet( 'worksheet attributes' )
 Spreadsheet::WriteExcel::Worksheet::new( '' )
-Spreadsheet::WriteExcel::Worksheet::keep_leading_zeros( '1' )
 Spreadsheet::WriteExcel::Worksheet::write( '0', '0', '03', '1' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__
 
 __DATA__
 <workbook>
-  <worksheet name="worksheet attributes" keep_leading_zeros="1">
+  <worksheet name="worksheet attributes">
     <cell text="03" />
   </worksheet>
 </workbook>

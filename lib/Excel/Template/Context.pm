@@ -29,6 +29,8 @@ sub new
     $self->{ACTIVE_FORMAT}    = Excel::Template::Format->blank_format($self);
     $self->{WORKSHEET_NAMES}  = undef;
 
+    $self->{__MARKS} = {};
+
     # Removed NAME_MAP until I figure out what the heck it's for
     for (qw( STACK PARAM_MAP ))
     {
@@ -107,7 +109,7 @@ sub resolve
     #    2) A decimal number
 
 #GGG Convert this to use //x
-    my ($op, $val) = $obj_val =~ m!^\s*([\+\*\/\-])?\s*([\d.]*\d)\s*$!oi;
+    my ($op, $val) = $obj_val =~ m/^\s*([\+\*\/\-])?\s*([\d.]*\d)\s*$/oi;
 
     # Unless it's a relative value, we have what we came for.
     return $obj_val unless $op;
@@ -237,9 +239,23 @@ sub new_worksheet
         $name = '';
     }
 
-    $self->active_worksheet(
+    return $self->active_worksheet(
         $self->{XLS}->add_worksheet( $name ),
     );
+}
+
+sub mark
+{
+    my $self = shift;
+
+    if ( @_ > 1 )
+    {
+        my %args = @_;
+
+        @{$self->{__MARKS}}{keys %args} = values %args;
+    }
+
+    return $self->{__MARKS}{$_[0]}
 }
 
 sub active_worksheet
@@ -335,7 +351,7 @@ None
 
 =head2 get_last_reference
 
-=head2 named_param
+=head2 mark
 
 =head2 new_worksheet
 

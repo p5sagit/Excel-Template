@@ -30,6 +30,8 @@ my %Manifest = (
     'SHADOW'    => 'Excel::Template::Container::Shadow',
     'STRIKEOUT' => 'Excel::Template::Container::Strikeout',
 
+    'KEEP_LEADING_ZEROS' => 'Excel::Template::Container::KeepLeadingZeros',
+
 # These are the helper objects
 # They are also in here to make E::T::Factory::isa() work.
     'CONTEXT'    => 'Excel::Template::Context',
@@ -45,7 +47,7 @@ my %Manifest = (
 my %isBuildable = map { $_ => ~~1 } qw(
     WORKBOOK WORKSHEET
     FORMAT BOLD HIDDEN ITALIC LOCKED OUTLINE SHADOW STRIKEOUT
-    IF ROW LOOP SCOPE
+    IF ROW LOOP SCOPE KEEP_LEADING_ZEROS
     CELL FORMULA
     VAR BACKREF RANGE
 );
