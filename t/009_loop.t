@@ -1,6 +1,5 @@
+BEGIN{ $^W = 0 }
 use strict;
-use warnings;
-$|++;
 
 use Test::More tests => 5;
 
@@ -31,6 +30,8 @@ ok(
             { value => 1 },
             { value => 2 },
             { value => 3 },
+        ],
+        no_iters => [
         ],
     ),
     'Parameters set',

@@ -1,6 +1,13 @@
 Revision history for Perl distribution Excel::Template
 
-0.17 Sat Nov 05 23:30:00 2004
+0.18 Fri Nov 12 14:45:00 2004
+    - Removed 'use warnings' from all tests
+    - All warnings are suppressed unless $^W is true
+    - Added 'height' value for ROW
+    - Added 'width' value for CELL
+    - Fixed PM_FILTER to work on Redhat
+
+0.17 Sat Nov 06 23:30:00 2004
     - Added worksheet protection
     - Fixed several bugs found by adding more tests
         - SCOPE node actually works

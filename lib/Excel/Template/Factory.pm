@@ -77,7 +77,7 @@ sub register
     {
         unless ($params{$_})
         {
-            warn "$_ was not supplied to register()\n";
+            warn "$_ was not supplied to register()\n" if $^W;
             return 0;
         }
     }
@@ -85,14 +85,14 @@ sub register
     my $name = uc $params{name};
     if (exists $Manifest{$name})
     {
-        warn "$params{name} already exists in the manifest.\n";
+        warn "$params{name} already exists in the manifest.\n" if $^W;
         return 0;
     }
 
     my $isa = uc $params{isa};
     unless (exists $Manifest{$isa})
     {
-        warn "$params{isa} does not exist in the manifest.\n";
+        warn "$params{isa} does not exist in the manifest.\n" if $^W;
         return 0;
     }
 

@@ -57,6 +57,8 @@ t/012_backref.t
 t/012.xml
 t/013_range.t
 t/013.xml
+t/014_heightwidth.t
+t/014.xml
 t/mock.pm
 t/Spreadsheet/WriteExcel.pm
 t/Spreadsheet/WriteExcel/Worksheet.pm

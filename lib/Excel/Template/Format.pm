@@ -115,7 +115,7 @@ use strict;
                 }
             }
 
-            warn "Property '$prop' is unrecognized\n";
+            warn "Property '$prop' is unrecognized\n" if $^W;
         }
 
         my $new_key = _params_to_key(%params);

@@ -59,6 +59,17 @@ sub render
         $context->add_reference( $ref, $row, $col );
     }
 
+    # Apply the cell width to the current column
+    if (my $width = $context->get($self, 'WIDTH'))
+    {
+        $width =~ s/\D//g;
+        $width *= 1;
+        if ($width > 0)
+        {
+            $context->active_worksheet->set_column($col, $col, $width);
+        }
+    }                                                                         
+
     $context->active_worksheet->$method(
         $row, $col,
         $self->get_text($context),
@@ -114,6 +125,11 @@ offset-based numbering.
 Adds the current cell to the a list of cells that can be backreferenced.
 This is useful when the current cell needs to be referenced by a
 formula. See BACKREF and RANGE.
+
+=item * WIDTH
+
+Sets the width of the column the cell is in. The last setting for a given column
+will win out.
 
 =back 4
 

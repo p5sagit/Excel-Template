@@ -5,8 +5,8 @@ use ExtUtils::MakeMaker;
 use strict;
 
 my $prereqs = {
-    'Test::Simple'            => 0.44,
     'Spreadsheet::WriteExcel' => 0.42,
+    'Test::More'              => 0.01,
     'XML::Parser'             => 0.01,
     'IO::Scalar'              => 0.01,
     'File::Basename'          => 0.01,
@@ -29,8 +29,8 @@ if ($] < 5.008)
 }
 
 my $pm_filter = $use_unicode
-    ? 'perl -p -e "s!UNI_YES ! !g;s!UNI_NO  !\\#!g"'
-    : 'perl -p -e "s!UNI_NO  ! !g;s!UNI_YES !\\#!g"';
+    ? q{perl -pi -e "s!UNI_YES ! !g;s!UNI_NO  !\\#!g"}
+    : q{perl -pi -e "s!UNI_NO  ! !g;s!UNI_YES !\\#!g"};
 
 WriteMakefile(
     NAME         => 'Excel::Template',

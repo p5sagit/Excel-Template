@@ -69,7 +69,7 @@ sub conditional_passes
     else
     {
         warn "Conditional 'is' value was [$is], defaulting to 'FALSE'" . $/
-            if $is ne 'FALSE';
+            if $is ne 'FALSE' && $^W;
 
         return 0 if $istrue;
     }

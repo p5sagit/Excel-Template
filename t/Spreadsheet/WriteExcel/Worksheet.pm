@@ -34,5 +34,23 @@ sub write {
     }
 }
 
+sub set_row {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::set_row( '@_' )";
+    }
+}
+
+sub set_column {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::set_column( '@_' )";
+    }
+}
+
 1;
 __END__

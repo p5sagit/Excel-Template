@@ -32,7 +32,7 @@ sub new
     {
         $self->{NO_PARAMS} = 1;
 
-        warn "INTERNAL ERROR: 'NAME' was blank was blank when passed to ", __PACKAGE__, $/;
+        warn "INTERNAL ERROR: 'NAME' was blank was blank when passed to ", __PACKAGE__, $/ if $^W;
 
         return $self;
     }
@@ -43,7 +43,7 @@ sub new
     unless (UNIVERSAL::isa($self->{DATA}, 'ARRAY'))
     {
         $self->{NO_PARAMS} = 1;
-        warn "'$self->{NAME}' does not have a list of parameters", $/;
+        warn "'$self->{NAME}' does not have a list of parameters", $/ if $^W;
 
         return $self;
     }

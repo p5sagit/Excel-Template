@@ -16,6 +16,20 @@ sub render
 
     $context->{COL} = 0;
 
+    # Apply the height to the current row
+    if (my $height = $context->get($self, 'HEIGHT'))
+    {
+        $height =~ s/\D//g;
+        $height *= 1;
+        if ($height > 0)
+        {
+            $context->active_worksheet->set_row(
+                $context->get( $self, 'ROW' ),
+                $height,
+            );
+        }
+    }
+
     return $self->SUPER::render($context);
 }
 
@@ -47,7 +61,13 @@ Excel::Template::Container
 
 =head1 ATTRIBUTES
 
-None
+=over 4
+
+=item * HEIGHT
+
+Sets the height of the row. The last setting for a given row will win out.
+
+=back 4
 
 =head1 CHILDREN
 

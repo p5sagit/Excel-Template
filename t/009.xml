@@ -16,6 +16,18 @@
       </row>
     </loop>
 
+    <loop name="no_iters">
+      <cell text="$value" />
+    </loop>
+
+    <loop name="no_params">
+      <cell text="$value" />
+    </loop>
+
+    <loop name="empty" />
+
+    <loop name="" />
+
   </worksheet>
 
   <loop name="worksheets">
