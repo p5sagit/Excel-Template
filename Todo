@@ -1,6 +1,63 @@
 TODO list for Perl distribution Excel::Template
 
-- Figure out if and how to add support for charts
-- Add more stringent tests
 - Add colspan (COL), rowspan (ROW), width (CELL), and height (ROW)
 - Anything else people suggest
+
+Missing S::WE features:
+  Workbook
+    set_tempdir
+    add_char_ext
+    set_custom_color
+    set_1904
+    set_codepage
+  Worksheet
+    write_unicode/write_unicode_le
+    write_url
+    write_url_range
+    write_date_time
+    write_comment
+    insert_bitmap
+    activate/select/set_first_sheet
+    set_selection
+    outline_settings
+    freeze_panes
+    thaw_panes
+    merge_range
+    set_zoom
+  Page Setup
+    set_landscape/portrait
+    set_paper
+    center_horizontally/center_vertically
+    set_margins
+    set_header/set_footer
+    repeat_rows/repeat_columns
+    hide_gridlines
+    print_row_col_headers
+    print_area
+    fit_to_pages
+    set_print_scale
+    set_v_pagebreaks/set_h_pagebreaks
+  Formats
+    colors
+    Support for builtin formats
+    set_center_across
+    set_text_wrap
+    set_rotation
+    set_indent
+    set_shrink
+    set_text_justlast
+    set_pattern
+    set_bg_color
+    set_fg_color
+    set_border
+    set_border_color
+    user-defined formats
+  Outlines / Grouping
+    for rows
+    for columns
+  Handling for maximums
+    Maximum number of chars in a string  32767
+    Maximum number of columns            256
+    Maximum number of rows               65536
+    Maximum chars in a sheet name        31
+    Maximum chars in a header/footer     254
