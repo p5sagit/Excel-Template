@@ -1,0 +1,79 @@
+package Excel::Template::TextObject;
+
+use strict;
+
+BEGIN {
+    use vars qw(@ISA);
+    @ISA = qw(Excel::Template::Base);
+
+    use Excel::Template::Base;
+
+#    use Unicode::String;
+}
+
+# This is a helper object. It is not instantiated by the user,
+# nor does it represent an XML object. Rather, certain elements,
+# such as <textbox>, can use this object to do text with variable
+# substitutions.
+
+sub new
+{
+    my $class = shift;
+    my $self = $class->SUPER::new(@_);
+
+    $self->{STACK} = [] unless UNIVERSAL::isa($self->{STACK}, 'ARRAY');
+
+    return $self;
+}
+
+sub resolve
+{
+    my $self = shift;
+    my ($context) = @_;
+
+#    my $t = Unicode::String::utf8('');
+    my $t = '';
+
+    for my $tok (@{$self->{STACK}})
+    {
+        my $val = $tok;
+        $val = $val->resolve($context)
+            if Excel::Template::Factory::isa($val, 'VAR');
+
+#        $t .= Unicode::String::utf8("$val");
+        $t .= $val;
+    }
+
+    return $t;
+}
+
+1;
+__END__
+
+=head1 NAME
+
+Excel::Template::TextObject
+
+=head1 PURPOSE
+
+=head1 NODE NAME
+
+=head1 INHERITANCE
+
+=head1 ATTRIBUTES
+
+=head1 CHILDREN
+
+=head1 AFFECTS
+
+=head1 DEPENDENCIES
+
+=head1 USAGE
+
+=head1 AUTHOR
+
+Rob Kinyon (rkinyon@columbus.rr.com)
+
+=head1 SEE ALSO
+
+=cut
