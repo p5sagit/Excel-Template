@@ -1,5 +1,9 @@
 Revision history for Perl distribution Excel::Template
 
+0.22 Thu Feb 25 15:00:00 2005
+    - new() now accepts either FILE or FILENAME
+    - parse() now accepts a filehandle or a filename
+
 0.21 Wed Feb 24 14:00:00 2005
     - Fixed documentation bug in BACKREF (Thanks to Paul Williams)
     - Added code to Makefile.PL to skip .swp files in the Makefile

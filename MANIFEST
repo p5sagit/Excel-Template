@@ -63,6 +63,7 @@ t/015_cell_type.t
 t/015.xml
 t/016_renderers.t
 t/016.xml
+t/017_filehandle.t
 t/pod.t
 t/pod_coverage.t
 t/mock.pm

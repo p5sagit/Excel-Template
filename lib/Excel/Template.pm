@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.21';
+    $VERSION  = '0.22';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -29,8 +29,11 @@ sub new
     my $class = shift;
     my $self = $class->SUPER::new(@_);
 
-    $self->parse_xml($self->{FILENAME})
-        if defined $self->{FILENAME};
+    $self->{FILE} = $self->{FILENAME}
+        if !defined $self->{FILE} && defined $self->{FILENAME};
+
+    $self->parse_xml($self->{FILE})
+        if defined $self->{FILE};
 
     my @renderer_classes = ( 'Spreadsheet::WriteExcel' );
 
@@ -125,13 +128,10 @@ sub output
 sub parse_xml
 {
     my $self = shift;
-    my ($fname) = @_;
+    my ($file) = @_;
 
-    my ($filename, $dirname) = fileparse($fname);
- 
     my @stack;
-    my $parser = XML::Parser->new(
-        Base => $dirname,
+    my @parms = (
         Handlers => {
             Start => sub {
                 shift;
@@ -186,12 +186,26 @@ sub parse_xml
         },
     );
 
+    if ( ref $file )
     {
-        open( INFILE, "<$fname" )
-            || die "Cannot open '$fname' for reading: $!\n";
+        *INFILE = $file;
+    }
+    else
+    {
+        my ($filename, $dirname) = fileparse($file);
+ 
+        push @parms, Base => $dirname;
 
-        $parser->parse(do { local $/ = undef; <INFILE> });
+        open( INFILE, "<$file" )
+            || die "Cannot open '$file' for reading: $!\n";
 
+    }
+
+    my $parser = XML::Parser->new( @parms );
+    $parser->parse(do { local $/ = undef; <INFILE> });
+
+    unless ( ref $file )
+    {
         close INFILE;
     }
 
@@ -212,6 +226,7 @@ sub _prepare_output
         UNICODE   => $self->{UNICODE},
     );
 
+#    print "@{$self->{WORKBOOKS}}\n";
     $_->render($context) for @{$self->{WORKBOOKS}};
 
     return ~~1;
@@ -289,13 +304,19 @@ into an XLS file.
 
 =head2 new()
 
-This creates a Excel::Template object. If passed a FILENAME parameter, it will
-parse the template in the given file. (You can also use the parse() method,
-described below.)
+This creates a Excel::Template object.
 
 =head3 Parameters
 
 =over 4
+
+=item * FILE / FILENAME
+
+Excel::Template will parse the template in the given file or filehandle automatically. (You can also use the parse() method, described below.)
+
+If you want to use the __DATA__ section, you can do so by passing
+
+  FILE => \*DATA
 
 =item * RENDERER
 
@@ -346,9 +367,9 @@ This method is exactly like L<HTML::Template>'s param() method.
 
 =head2 parse() / parse_xml()
 
-This method actually parses the template file. It can either be called
-separately or through the new() call. It will die() if it runs into a situation
-it cannot handle.
+This method actually parses the template file. It can either be called separately or through the new() call. It will die() if it runs into a situation it cannot handle.
+
+If a filename is passed in (vs. a filehandle), the directory name will be passed in to XML::Parser as the I<Base> parameter. This will allow for XML directives to work as expected.
 
 =head2 write_file()
 
@@ -463,14 +484,14 @@ Excel::Template is also part of the CPAN Kwalitee initiative, being one of the t
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
 File                           stmt branch   cond    sub    pod   time  total
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
-blib/lib/Excel/Template.pm     90.0   57.1   50.0   90.5  100.0   26.0   80.8
-...ib/Excel/Template/Base.pm   83.3   50.0   66.7   75.0   88.9    8.8   80.0
+blib/lib/Excel/Template.pm     90.4   62.5   58.8   90.5  100.0   30.2   82.0
+...ib/Excel/Template/Base.pm   83.3   50.0   66.7   75.0   88.9    8.2   80.0
 ...cel/Template/Container.pm   46.3   20.0   33.3   58.3   85.7    4.6   47.7
-...emplate/Container/Bold.pm  100.0    n/a    n/a  100.0    0.0    0.6   95.0
-.../Container/Conditional.pm   58.5   52.3   66.7   75.0   66.7    0.7   58.4
-...plate/Container/Format.pm  100.0    n/a    n/a  100.0    0.0    0.8   96.6
+...emplate/Container/Bold.pm  100.0    n/a    n/a  100.0    0.0    0.5   95.0
+.../Container/Conditional.pm   58.5   52.3   66.7   75.0   66.7    0.8   58.4
+...plate/Container/Format.pm  100.0    n/a    n/a  100.0    0.0    0.7   96.6
 ...plate/Container/Hidden.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
-...plate/Container/Italic.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
+...plate/Container/Italic.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
 ...plate/Container/Locked.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
 ...emplate/Container/Loop.pm   55.6   40.0   50.0   77.8   75.0    0.5   56.6
 ...late/Container/Outline.pm   71.4    n/a    n/a   80.0    0.0    0.0   70.0
@@ -478,20 +499,20 @@ blib/lib/Excel/Template.pm     90.0   57.1   50.0   90.5  100.0   26.0   80.8
 ...mplate/Container/Scope.pm  100.0    n/a    n/a  100.0    n/a    0.1  100.0
 ...plate/Container/Shadow.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
 ...te/Container/Strikeout.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
-...ate/Container/Workbook.pm  100.0    n/a    n/a  100.0    n/a    1.1  100.0
+...ate/Container/Workbook.pm  100.0    n/a    n/a  100.0    n/a    1.0  100.0
 ...te/Container/Worksheet.pm   94.1   50.0    n/a  100.0    0.0    0.9   88.0
-...Excel/Template/Context.pm   83.1   53.4   54.2   95.0   92.9   19.2   75.2
-...Excel/Template/Element.pm  100.0    n/a    n/a  100.0    n/a    0.5  100.0
+...Excel/Template/Context.pm   83.1   53.4   54.2   95.0   92.9   19.1   75.2
+...Excel/Template/Element.pm  100.0    n/a    n/a  100.0    n/a    0.4  100.0
 ...mplate/Element/Backref.pm  100.0   50.0   33.3  100.0    0.0    0.1   87.1
 .../Template/Element/Cell.pm   95.8   65.0   80.0  100.0   66.7    3.6   86.9
 ...mplate/Element/Formula.pm  100.0    n/a    n/a  100.0    0.0    0.3   94.1
 ...Template/Element/Range.pm  100.0   66.7    n/a  100.0   66.7    0.2   93.3
-...l/Template/Element/Var.pm  100.0    n/a    n/a  100.0    0.0    0.2   94.1
-...Excel/Template/Factory.pm   57.1   34.6    n/a   88.9  100.0   15.4   55.2
-.../Excel/Template/Format.pm   98.3   81.2   33.3  100.0  100.0    9.9   93.2
-...xcel/Template/Iterator.pm   85.2   70.6   70.6   84.6   87.5    2.0   80.4
-...el/Template/TextObject.pm   92.9   62.5   33.3  100.0   50.0    3.6   83.0
-Total                          83.0   55.6   57.0   91.1   98.7  100.0   78.6
+...l/Template/Element/Var.pm  100.0    n/a    n/a  100.0    0.0    0.1   94.1
+...Excel/Template/Factory.pm   57.1   34.6    n/a   88.9  100.0   14.3   55.2
+.../Excel/Template/Format.pm   98.3   81.2   33.3  100.0  100.0    8.9   93.2
+...xcel/Template/Iterator.pm   85.2   70.6   70.6   84.6   87.5    1.9   80.4
+...el/Template/TextObject.pm   92.9   62.5   33.3  100.0   50.0    2.7   83.0
+Total                          83.1   56.6   58.3   91.1   98.7  100.0   78.8
 ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 =head1 COPYRIGHT
