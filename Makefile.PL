@@ -14,23 +14,15 @@ my $prereqs = {
 
 # The assumption is Perl 5.8.0 and greater doesn't need Unicode::String.
 
-my $use_unicode = 0;
 if ($] < 5.008)
 {
-    print "Do you want Unicode support (y/N)? ";
-    my $answer = <STDIN>;
-
-    if ($answer =~ /^[Yy]/)
+    eval { require Unicode::String; };
+    if ($@)
     {
-            $prereqs->{'Unicode::String'} = '0.01';
-            $use_unicode = 1;
+        print "Note: If you want to work with Unicode, you will need to install";
+        print "the optional module Unicode::String and set USE_UNICODE to true.";
     }
 }
-
-my $pm_filter = $use_unicode
-    ? q{perl -pi.old -e "s!UNI_YES ! !g;s!UNI_NO  !\\#!g"}
-    : q{perl -pi.old -e "s!UNI_NO  ! !g;s!UNI_YES !\\#!g"}
-;
 
 WriteMakefile(
     NAME         => 'Excel::Template',
@@ -38,5 +30,4 @@ WriteMakefile(
     AUTHOR       => 'Rob Kinyon (rob.kinyon@gmail.com)',
     ABSTRACT     => 'Excel::Template',
     PREREQ_PM    => $prereqs,
-    PM_FILTER    => $pm_filter,
 );

@@ -16,6 +16,42 @@ sub new {
     return $self;
 }
 
+sub write_string {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::write_string( '@_' )";
+    }
+}
+
+sub write_number {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::write_number( '@_' )";
+    }
+}
+
+sub write_blank {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::write_blank( '@_' )";
+    }
+}
+
+sub write_url {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::write_url( '@_' )";
+    }
+}
+
 sub write_formula {
     my $self = shift;
 

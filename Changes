@@ -1,5 +1,9 @@
 Revision history for Perl distribution Excel::Template
 
+0.20 Wed Jan 26 12:00:00 2004
+    - Removed PM_FILTER by adding an optional USE_UNICODE runtime parameter.
+    - Added a "type" attribute to CELL to allow printing by the write_*() family
+
 0.19 Wed Dec 08 12:00:00 2004
     - Fixed META.yml
     - Added more values to the MANIFEST.SKIP

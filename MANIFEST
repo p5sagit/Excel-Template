@@ -59,6 +59,8 @@ t/013_range.t
 t/013.xml
 t/014_heightwidth.t
 t/014.xml
+t/015_cell_type.t
+t/015.xml
 t/mock.pm
 t/Spreadsheet/WriteExcel.pm
 t/Spreadsheet/WriteExcel/Worksheet.pm

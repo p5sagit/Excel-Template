@@ -7,8 +7,6 @@ BEGIN {
     @ISA = qw(Excel::Template::Base);
 
     use Excel::Template::Base;
-
-UNI_YES     use Unicode::String;
 }
 
 # This is a helper object. It is not instantiated by the user,
@@ -31,8 +29,18 @@ sub resolve
     my $self = shift;
     my ($context) = @_;
 
-UNI_YES    my $t = Unicode::String::utf8('');
-UNI_NO    my $t = '';
+    my $use_unicode = $context->use_unicode;
+
+    my $t;
+    if ($use_unicode)
+    {
+        require Unicode::String;
+        $t = Unicode::String::utf8('');
+    }
+    else
+    {
+        $t = '';
+    }
 
     for my $tok (@{$self->{STACK}})
     {
@@ -40,8 +48,9 @@ UNI_NO    my $t = '';
         $val = $val->resolve($context)
             if Excel::Template::Factory::is_embedded( $val );
 
-UNI_YES        $t .= Unicode::String::utf8("$val");
-UNI_NO        $t .= $val;
+        $t .= $use_unicode
+            ? Unicode::String::utf8("$val")
+            : $val;
     }
 
     return $t;

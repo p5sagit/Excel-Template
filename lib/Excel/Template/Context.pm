@@ -15,7 +15,7 @@ use Excel::Template::Format;
 # represent an XML object. Rather, every container will use this object to
 # maintain the context for its children.
 
-my %isAbsolute = map { $_ => !!1 } qw(
+my %isAbsolute = map { $_ => ~~1 } qw(
     ROW
     COL
 );
@@ -37,6 +37,8 @@ sub new
     return $self;
 }
 
+sub use_unicode { $_[0]->{UNICODE} && 1 }
+
 sub _find_param_in_map
 {
     my $self = shift;
@@ -50,7 +52,7 @@ sub _find_param_in_map
         next unless exists $map->{$param};
         $depth--, next if $depth;
 
-        $found = !!1;
+        $found = ~~1;
         $val = $map->{$param};
         last;
     }
@@ -144,7 +146,7 @@ sub enter_scope
         $self->{$key} = $self->resolve($obj, $key);
     }
 
-    return !!1;
+    return ~~1;
 }
 
 sub exit_scope
@@ -160,7 +162,7 @@ sub exit_scope
 
     pop @{$self->{STACK}};
 
-    return !!1;
+    return ~~1;
 }
 
 sub get
@@ -255,7 +257,7 @@ sub add_reference
 
     push @{$self->{REFERENCES}{$ref}}, [ $row, $col ];
 
-    return !!1;
+    return ~~1;
 }
 
 sub get_all_references

@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.19';
+    $VERSION  = '0.20';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -49,6 +49,9 @@ sub new
             join("\n\t", @renderer_classes) .
             "\n";
 
+    $self->{USE_UNICODE} = ~~0
+        if $] >= 5.008;
+
     return $self;
 }
 
@@ -66,7 +69,7 @@ sub param
     $params{uc $_} = delete $params{$_} for keys %params;
     @{$self->{PARAM_MAP}}{keys %params} = @params{keys %params};
 
-    return !!1;
+    return ~~1;
 }
 
 sub write_file
@@ -81,7 +84,7 @@ sub write_file
 
     $xls->close;
 
-    return !!1;
+    return ~~1;
 }
 
 sub output
@@ -183,6 +186,7 @@ sub _prepare_output
 
         XLS       => $xls,
         PARAM_MAP => [ $self->{PARAM_MAP} ],
+        UNICODE   => $self->{UNICODE},
     );
 
     $_->render($context) for @{$self->{WORKBOOKS}};
@@ -268,7 +272,14 @@ described below.)
 
 new() accepts an optional BIG_FILE parameter. This will attempt to change the
 renderer from L<Spreadsheet::WriteExcel> to L<Spreadsheet::WriteExcel::Big>. You
-must have L<Spreadsheet::WriteExcel::Big> installed on your system.
+must already have L<Spreadsheet::WriteExcel::Big> installed on your system.
+
+new() also accepts an optional USE_UNICODE parameter. This will use
+L<Unicode::String> to represent strings instead of Perl's internal string
+handling. You must already have L<Unicode::String> installed on your system.
+
+The USE_UNICODE parameter will be ignored if you are using Perl 5.8 or higher as
+Perl's internal string handling is unicode-aware.
 
 NOTE: L<Spreadsheet::WriteExcel::Big> and mod_perl clash for some reason. This
 is outside of my control.

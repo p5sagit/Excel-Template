@@ -37,17 +37,45 @@ sub get_text
     }
     else
     {
-UNI_YES        $txt = Unicode::String::utf8('');
-UNI_NO         $txt = '';
+        $txt = $context->use_unicode
+            ? Unicode::String::utf8('')
+            : '';
     }
                                                                                 
     return $txt;
 }
 
+my %legal_types = (
+    'blank'   => 'write_blank',
+    'formula' => 'write_formula',
+    'number'  => 'write_number',
+    'string'  => 'write_string',
+    'url'     => 'write_url',
+);
+
 sub render
 {
     my $self = shift;
     my ($context, $method) = @_;
+
+    unless ( $method )
+    {
+        my $type = $context->get( $self, 'TYPE' );
+        if ( defined $type )
+        {
+            my $type = lc $type;
+
+            if ( exists $legal_types{ $type } )
+            {
+                $method = $legal_types{ $type };
+            }
+            else
+            {
+                warn "'$type' is not a legal cell type.\n"
+                    if $^W;
+            }
+        }
+    }
 
     $method ||= 'write';
 
@@ -131,9 +159,32 @@ formula. See BACKREF and RANGE.
 Sets the width of the column the cell is in. The last setting for a given column
 will win out.
 
-=back 4
+=item * TYPE
 
-There will be more parameters added, as features are added.
+This allows you to specify what write_*() method will be used. The default is to
+call write() and let S::WE make the right call. However, you may wish to
+override it. Excel::Template will not do any form of validation on what you
+provide. You are assumed to know what you're doing.
+
+The legal types are:
+
+=over 4
+
+=item * blank
+
+=item * formula
+
+=item * number
+
+=item * string
+
+=item * url
+
+=back
+
+q.v. L<Spreadsheet::WriteExcel> for more info.
+
+=back
 
 =head1 CHILDREN
 
