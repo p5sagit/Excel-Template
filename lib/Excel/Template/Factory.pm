@@ -16,13 +16,16 @@ BEGIN {
     'WORKBOOK'  => 'Excel::Template::Container::Workbook',
     'WORKSHEET' => 'Excel::Template::Container::Worksheet',
 
+    'BACKREF'   => 'Excel::Template::Element::Backref',
     'CELL'      => 'Excel::Template::Element::Cell',
     'FORMULA'   => 'Excel::Template::Element::Formula',
+    'RANGE'     => 'Excel::Template::Element::Range',
     'VAR'       => 'Excel::Template::Element::Var',
 
     'FORMAT'    => 'Excel::Template::Container::Format',
 
 # These are all the Format short-cut objects
+# They are also instantiable
     'BOLD'      => 'Excel::Template::Container::Bold',
     'HIDDEN'    => 'Excel::Template::Container::Hidden',
     'ITALIC'    => 'Excel::Template::Container::Italic',
@@ -32,7 +35,7 @@ BEGIN {
     'STRIKEOUT' => 'Excel::Template::Container::Strikeout',
 
 # These are the helper objects
-
+# They are also in here to make E::T::Factory::isa() work.
     'CONTEXT'    => 'Excel::Template::Context',
     'ITERATOR'   => 'Excel::Template::Iterator',
     'TEXTOBJECT' => 'Excel::Template::TextObject',
@@ -52,6 +55,8 @@ BEGIN {
     ITALIC
     OUTLINE
     LOOP
+    BACKREF
+    RANGE
     ROW
     SHADOW
     STRIKEOUT
@@ -135,6 +140,14 @@ sub isa
         : UNIVERSAL::isa(@_)
 }
 
+sub is_embedded
+{
+    return unless @_ >= 1;
+
+    isa( $_[0], $_ ) && return !!1 for qw( VAR BACKREF RANGE );
+    return;
+}
+
 1;
 __END__
 
@@ -144,19 +157,15 @@ Excel::Template::Factory
 
 =head1 PURPOSE
 
-=head1 NODE NAME
-
-=head1 INHERITANCE
-
-=head1 ATTRIBUTES
-
-=head1 CHILDREN
-
-=head1 AFFECTS
-
-=head1 DEPENDENCIES
+To provide a common way to instantiate Excel::Template nodes
 
 =head1 USAGE
+
+=head2 register()
+
+Use this to register your own nodes.
+
+Example forthcoming.
 
 =head1 AUTHOR
 

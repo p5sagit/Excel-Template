@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.14';
+    $VERSION  = '0.15';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -123,11 +123,11 @@ sub parse_xml
                 my $node = Excel::Template::Factory->create_node($name, @_);
                 die "'$name' (@_) didn't make a node!\n" unless defined $node;
 
-                if ($name eq 'WORKBOOK')
+                if ( $node->isa( 'WORKBOOK' ) )
                 {
                     push @{$self->{WORKBOOKS}}, $node;
                 }
-                elsif ($name eq 'VAR')
+                elsif ( $node->is_embedded )
                 {
                     return unless @stack;
                                                                                 
@@ -346,6 +346,16 @@ but I expect to be adding on to it very soon.
 =head1 CONTRIBUTORS
 
 There is a mailing list at http://groups-beta.google.com/group/ExcelTemplate
+
+Robert Graff -
+
+=over 4
+
+=item * Finishing formats
+
+=item * Fixing several bugs in worksheet naming
+
+=back 4
 
 =head1 COPYRIGHT
 

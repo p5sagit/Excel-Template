@@ -38,7 +38,7 @@ UNI_NO    my $t = '';
     {
         my $val = $tok;
         $val = $val->resolve($context)
-            if Excel::Template::Factory::isa($val, 'VAR');
+            if Excel::Template::Factory::is_embedded( $val );
 
 UNI_YES        $t .= Unicode::String::utf8("$val");
 UNI_NO        $t .= $val;

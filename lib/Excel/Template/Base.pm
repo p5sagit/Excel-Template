@@ -25,6 +25,7 @@ sub new
 }
                                                                                 
 sub isa { Excel::Template::Factory::isa(@_) }
+sub is_embedded { Excel::Template::Factory::is_embedded(@_) }
 
 sub calculate { ($_[1])->get(@_[0,2]) }
 #{

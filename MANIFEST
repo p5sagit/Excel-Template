@@ -26,8 +26,11 @@ lib/Excel/Template/Container/Strikeout.pm
 lib/Excel/Template/Container/Shadow.pm
 lib/Excel/Template/Container/Workbook.pm
 lib/Excel/Template/Container/Worksheet.pm
+lib/Excel/Template/Element/Backref.pm
 lib/Excel/Template/Element/Cell.pm_
 lib/Excel/Template/Element/Formula.pm
+lib/Excel/Template/Element/Range.pm
 lib/Excel/Template/Element/Var.pm
 t/001_load.t
 Makefile.PL
+META.yml                                 Module meta-data (added by MakeMaker)

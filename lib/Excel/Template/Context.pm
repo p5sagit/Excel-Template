@@ -15,7 +15,7 @@ use Excel::Template::Format;
 # represent an XML object. Rather, every container will use this object to
 # maintain the context for its children.
 
-my %isAbsolute = map { $_ => 1 } qw(
+my %isAbsolute = map { $_ => !!1 } qw(
     ROW
     COL
 );
@@ -27,6 +27,7 @@ sub new
 
     $self->{ACTIVE_WORKSHEET} = undef;
     $self->{ACTIVE_FORMAT}    = Excel::Template::Format->blank_format($self);
+    $self->{WORKSHEET_NAMES}  = undef;
 
     UNIVERSAL::isa($self->{$_}, 'ARRAY') || ($self->{$_} = [])
         for qw( STACK PARAM_MAP NAME_MAP );
@@ -43,15 +44,13 @@ sub _find_param_in_map
     $param = uc $param;
     $depth ||= 0;
 
-    my $val = undef;
-    my $found = 0;
-
+    my ($val, $found);
     for my $map (reverse @{$self->{$map}})
     {
         next unless exists $map->{$param};
         $depth--, next if $depth;
 
-        $found = 1;
+        $found = !!1;
         $val = $map->{$param};
         last;
     }
@@ -145,7 +144,7 @@ sub enter_scope
         $self->{$key} = $self->resolve($obj, $key);
     }
 
-    return 1;
+    return !!1;
 }
 
 sub exit_scope
@@ -161,7 +160,7 @@ sub exit_scope
 
     pop @{$self->{STACK}};
 
-    return 1;
+    return !!1;
 }
 
 sub get
@@ -209,14 +208,31 @@ sub active_format
 sub new_worksheet
 {
     my $self = shift;
-    my ($name) = @_;
+    my ($worksheet) = @_;
 
     $self->{ROW} = $self->{COL} = 0;
+    $self->{REFERENCES} = {};
+
+    my $name = $self->get( $worksheet, 'NAME' );
+
+    if ( defined $name && length $name )
+    {
+        if ( exists $self->{WORKSHEET_NAMES}{$name} )
+        {
+            $name = '';
+        }
+        else
+        {
+            $self->{WORKSHEET_NAMES}{$name} = undef;
+        }
+    }
+    else
+    {
+        $name = '';
+    }
 
     $self->active_worksheet(
-        $self->{XLS}->add_worksheet(
-            $name || '',
-        ),
+        $self->{XLS}->add_worksheet( $name ),
     );
 }
 
@@ -228,6 +244,38 @@ sub active_worksheet
         if @_;
 
     $self->{ACTIVE_WORKSHEET};
+}
+
+sub add_reference
+{
+    my $self = shift;
+    my ($ref, $row, $col) = @_;
+
+    $self->{REFERENCES}{$ref} ||= [];
+
+    push @{$self->{REFERENCES}{$ref}}, [ $row, $col ];
+
+    return !!1;
+}
+
+sub get_all_references
+{
+    my $self = shift;
+    my $ref = uc shift;
+
+    $self->{REFERENCES}{$ref} ||= [];
+
+    return @{ $self->{REFERENCES}{$ref} };
+}
+
+sub get_last_reference
+{
+    my $self = shift;
+    my $ref = uc shift;
+
+    $self->{REFERENCES}{$ref} ||= [];
+
+    return @{ $self->{REFERENCES}{$ref}[-1] };
 }
 
 1;

@@ -1,6 +1,17 @@
-Revision history for Perl module Excel::Template
+Revision history for Perl distribution Excel::Template
 
-0.14 Wed Nov 04 13:30:00 2004
+0.15 Thu Nov 04 16:15:00 2004
+        - Fixed bugs that were:
+          - preventing a worksheet from using a variable name in a loop
+          - allowing two worksheets to have the same name
+          - preventing a worksheet from being called '0' or '0.0'
+        - Added back-references. This allows for one cell to refer to another
+          cell in an Excel-aware way, especially in formulas.
+        - Added the following nodes:
+          - BACKREF
+          - RANGE
+
+0.14 Thu Nov 04 13:30:00 2004
         - Added new format support for (nearly) all formats supported by
           Spreadsheet::WriteExcel
         - Fixed email address everywhere

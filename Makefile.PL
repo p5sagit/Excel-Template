@@ -8,6 +8,7 @@ my $prereqs = {
     'Test::Simple'            => 0.44,
     'XML::Parser'             => 0.01,
     'IO::File'                => 0.01,
+    'IO::Scalar'              => 0.01,
     'File::Basename'          => 0.01,
     'Spreadsheet::WriteExcel' => 0.42,
 };

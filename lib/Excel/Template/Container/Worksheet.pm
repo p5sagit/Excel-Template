@@ -14,7 +14,7 @@ sub render
     my $self = shift;
     my ($context) = @_;
 
-    $context->new_worksheet($self->{NAME});
+    $context->new_worksheet( $self );
 
     return $self->SUPER::render($context);
 }

@@ -49,8 +49,16 @@ sub render
     my $self = shift;
     my ($context) = @_;
 
+    my ($row, $col) = map { $context->get($self, $_) } qw(ROW COL);
+
+    my $ref = uc $context->get( $self, 'REF' );
+    if (defined $ref && length $ref)
+    {
+        $context->add_reference( $ref, $row, $col );
+    }
+
     $context->active_worksheet->write(
-        (map { $context->get($self, $_) } qw(ROW COL)),
+        $row, $col,
         $self->get_text($context),
         $context->active_format,
     );
