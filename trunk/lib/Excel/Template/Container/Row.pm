@@ -72,7 +72,7 @@ Generally, you will have CELL and/or FORMULA tags within a ROW.
 
 =head1 AUTHOR
 
-Rob Kinyon (rkinyon@columbus.rr.com)
+Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 

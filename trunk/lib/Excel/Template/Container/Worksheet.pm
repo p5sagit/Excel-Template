@@ -14,7 +14,7 @@ sub render
     my $self = shift;
     my ($context) = @_;
 
-    $context->new_worksheet($self->{NAME});
+    $context->new_worksheet( $self );
 
     return $self->SUPER::render($context);
 }
@@ -71,7 +71,7 @@ In the above example, the children will be executed in the context of the
 
 =head1 AUTHOR
 
-Rob Kinyon (rkinyon@columbus.rr.com)
+Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
