@@ -180,7 +180,7 @@ In the above example, the children will be executed if the value of __ODD__
 
 =head1 AUTHOR
 
-Rob Kinyon (rkinyon@columbus.rr.com)
+Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 

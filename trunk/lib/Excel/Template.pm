@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.12';
+    $VERSION  = '0.14';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -341,7 +341,11 @@ but I expect to be adding on to it very soon.
 =head1 AUTHOR
 
     Rob Kinyon
-    rkinyon@columbus.rr.com
+    rob.kinyon@gmail.com
+
+=head1 CONTRIBUTORS
+
+There is a mailing list at http://groups-beta.google.com/group/ExcelTemplate
 
 =head1 COPYRIGHT
 

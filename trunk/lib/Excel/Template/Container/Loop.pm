@@ -172,7 +172,7 @@ also hide outside variables with inner values, if you desire, just like Perl.
 
 =head1 AUTHOR
 
-Rob Kinyon (rkinyon@columbus.rr.com)
+Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
