@@ -4,7 +4,7 @@ use Test::More tests => 4;
 
 use lib 't';
 use mock;
-mock->reset;
+mock::reset;
 
 my $CLASS = 'Excel::Template';
 use_ok( $CLASS );
@@ -16,7 +16,7 @@ isa_ok( $object, $CLASS );
 
 ok( $object->write_file( 'filename' ), 'Something returned' );
 
-my @calls = mock->get_calls;
+my @calls = mock::get_calls;
 is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcel::new( 'filename' )
 Spreadsheet::WriteExcel::add_format( '' )

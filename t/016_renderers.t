@@ -9,7 +9,7 @@ my $CLASS = 'Excel::Template';
 use_ok( $CLASS );
 
 {
-    mock->reset;
+    mock::reset;
     my $object = $CLASS->new(
         renderer => 'big',
         filename => 't/016.xml',
@@ -18,7 +18,7 @@ use_ok( $CLASS );
 
     ok( $object->write_file( 'filename' ), 'Something returned' );
 
-    my @calls = mock->get_calls;
+    my @calls = mock::get_calls;
     is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcel::Big::new( 'filename' )
 Spreadsheet::WriteExcel::Big::add_format( '' )
@@ -27,7 +27,7 @@ __END_EXPECTED__
 }
 
 {
-    mock->reset;
+    mock::reset;
     my $object = $CLASS->new(
         renderer => Excel::Template->RENDER_XML,
         filename => 't/016.xml',
@@ -36,7 +36,7 @@ __END_EXPECTED__
 
     ok( $object->write_file( 'filename' ), 'Something returned' );
 
-    my @calls = mock->get_calls;
+    my @calls = mock::get_calls;
     is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcelXML::new( 'filename' )
 Spreadsheet::WriteExcelXML::close( '' )
@@ -44,7 +44,7 @@ __END_EXPECTED__
 }
 
 {
-    mock->reset;
+    mock::reset;
     my $object = $CLASS->new(
         renderer => Excel::Template->RENDER_NML,
         filename => 't/016.xml',
@@ -53,7 +53,7 @@ __END_EXPECTED__
 
     ok( $object->write_file( 'filename' ), 'Something returned' );
 
-    my @calls = mock->get_calls;
+    my @calls = mock::get_calls;
     is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcel::new( 'filename' )
 Spreadsheet::WriteExcel::close( '' )

@@ -29,8 +29,11 @@ sub new
     $self->{ACTIVE_FORMAT}    = Excel::Template::Format->blank_format($self);
     $self->{WORKSHEET_NAMES}  = undef;
 
-    UNIVERSAL::isa($self->{$_}, 'ARRAY') || ($self->{$_} = [])
-        for qw( STACK PARAM_MAP NAME_MAP );
+    for (qw( STACK PARAM_MAP NAME_MAP ))
+    {
+        next if defined $self->{$_} && UNIVERSAL::isa($self->{$_}, 'ARRAY');
+        $self->{$_} = [];
+    }
 
     $self->{$_} = 0 for keys %isAbsolute;
 
@@ -289,19 +292,55 @@ Excel::Template::Context
 
 =head1 PURPOSE
 
+This is a helper node that provides the global context for the nodes do their processing within. It provides attribute scoping, parameter resolution, and other very nice things.
+
+Documentation is provided for if you wish to subclass another node.
+
 =head1 NODE NAME
+
+None
 
 =head1 INHERITANCE
 
+None
+
 =head1 ATTRIBUTES
+
+None
 
 =head1 CHILDREN
 
+None
+
 =head1 AFFECTS
+
+Everything
 
 =head1 DEPENDENCIES
 
-=head1 USAGE
+None
+
+=head1 METHODS
+
+=head2 active_format
+
+=head2 active_worksheet
+
+=head2 add_reference
+
+=head2 get
+
+=head2 get_all_references
+
+=head2 get_last_reference
+
+=head2 named_param
+
+=head2 new_worksheet
+
+=head2 param
+
+=head2 use_unicode
 
 =head1 AUTHOR
 

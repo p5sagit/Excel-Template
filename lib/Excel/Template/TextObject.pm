@@ -19,7 +19,9 @@ sub new
     my $class = shift;
     my $self = $class->SUPER::new(@_);
 
-    $self->{STACK} = [] unless UNIVERSAL::isa($self->{STACK}, 'ARRAY');
+    $self->{STACK} = []
+        unless defined $self->{STACK} &&
+            UNIVERSAL::isa($self->{STACK}, 'ARRAY');
 
     return $self;
 }

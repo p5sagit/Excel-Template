@@ -6,6 +6,7 @@ Revision history for Perl distribution Excel::Template
     - Added RENDERER option to new()
       - Deprecated BIG_FILE
     - Added pod.t and pod_coverage.t
+    - Tests now run under 5.005_02 without warnings
 
 0.20 Wed Jan 26 12:00:00 2005
     - Removed PM_FILTER by adding an optional USE_UNICODE runtime parameter.

@@ -11,7 +11,7 @@ sub new
 {
     my $class = shift;
                                                                                 
-    push @_, %{shift @_} while UNIVERSAL::isa($_[0], 'HASH');
+    push @_, %{shift @_} while defined $_[0] && UNIVERSAL::isa($_[0], 'HASH');
     (@_ % 2) 
         and die "$class->new() called with odd number of option parameters\n";
                                                                                 
@@ -112,7 +112,17 @@ None
 
 =head1 METHODS
 
-None
+=head2 calculate
+
+This is a wrapper around Excel::Template::Context->get()
+
+=head2 isa
+
+This is a wrapper around Excel::Template::Factory->isa()
+
+=head2 is_embedded
+
+This is a wrapper around Excel::Template::Factory->is_embedded()
 
 =head1 AUTHOR
 

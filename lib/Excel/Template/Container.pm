@@ -17,7 +17,9 @@ sub new
     my $class = shift;
     my $self = $class->SUPER::new(@_);
 
-    $self->{ELEMENTS} = [] unless UNIVERSAL::isa($self->{ELEMENTS}, 'ARRAY');
+    $self->{ELEMENTS} = []
+        unless exists $self->{ELEMENTS} &&
+            UNIVERSAL::isa($self->{ELEMENTS}, 'ARRAY');
 
     return $self;
 }
