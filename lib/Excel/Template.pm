@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.18';
+    $VERSION  = '0.19';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -169,7 +169,7 @@ sub parse_xml
         close INFILE;
     }
 
-    return !!1;
+    return ~~1;
 }
 *parse = \&parse_xml;
 
@@ -187,7 +187,7 @@ sub _prepare_output
 
     $_->render($context) for @{$self->{WORKBOOKS}};
 
-    return !!1;
+    return ~~1;
 }
 
 sub register { shift; Excel::Template::Factory::register(@_) }
@@ -249,9 +249,6 @@ need to use the same datastructure as HTML::Template, but provide Excel files
 instead. The existing modules don't do the trick, as they require replication
 of logic that's already been done within HTML::Template.
 
-Currently, only a small subset of the planned features are supported. This is
-meant to be a test of the waters, to see what features people actually want.
-
 =head1 MOTIVATION
 
 I do a lot of Perl/CGI for reporting purposes. In nearly every place I've been,
@@ -265,15 +262,20 @@ into an XLS file.
 
 =head2 new()
 
-This creates a Excel::Template object. If passed a filename parameter, it will
+This creates a Excel::Template object. If passed a FILENAME parameter, it will
 parse the template in the given file. (You can also use the parse() method,
 described below.)
 
+new() accepts an optional BIG_FILE parameter. This will attempt to change the
+renderer from L<Spreadsheet::WriteExcel> to L<Spreadsheet::WriteExcel::Big>. You
+must have L<Spreadsheet::WriteExcel::Big> installed on your system.
+
+NOTE: L<Spreadsheet::WriteExcel::Big> and mod_perl clash for some reason. This
+is outside of my control.
+
 =head2 param()
 
-This method is exactly like HTML::Template's param() method. Although I will
-be adding more to this section later, please see HTML::Template's description
-for info right now.
+This method is exactly like L<HTML::Template>'s param() method.
 
 =head2 parse() / parse_xml()
 
@@ -294,31 +296,63 @@ merging of the template and the parameters occurs.)
 
 =head1 SUPPORTED NODES
 
-This is just a list of nodes. See the other classes in this distro for more
+This is a partial list of nodes. See the other classes in this distro for more
 details on specific parameters and the like.
 
 Every node can set the ROW and COL parameters. These are the actual ROW/COL
-values that the next CELL tag will write into.
+values that the next CELL-type tag will write into.
 
 =over 4
 
-=item * WORKBOOK
+=item * L<WORKBOOK|Excel::Template::Container::Workbook>
 
-=item * WORKSHEET
+This is the node representing the workbook. It is the parent for all other
+nodes.
 
-=item * IF
+=item * L<WORKSHEET|Excel::Template::Container::Worksheet>
 
-=item * LOOP
+This is the node representing a given worksheet.
 
-=item * ROW
+=item * L<IF|Excel::Template::Container::Conditional>
 
-=item * CELL
+This node represents a conditional expression. Its children may or may not be
+rendered. It behaves just like L<HTML::Template>'s TMPL_IF.
 
-=item * FORMULA
+=item * L<LOOP|Excel::Template::Container::Loop>
 
-=item * BOLD
+This node represents a loop. It behaves just like L<HTML::Template>'s TMPL_LOOP.
 
-=item * ITALIC
+=item * L<ROW|Excel::Template::Container::Row>
+
+This node represents a row of data. This is the A in A1.
+
+=item * L<FORMAT|Excel::Template::Container::Format>
+
+This node varies the format for its children. All formatting options supported
+in L<Spreadsheet::WriteExcel> are supported here. There are also a number of
+formatting shortcuts, such as L<BOLD|Excel::Template::Container::Bold> and
+L<ITALIC|Excel::Template::Container::Italic>.
+
+=item * L<BACKREF|Excel::Template::Element::Backref>
+
+This refers back to a cell previously named.
+
+=item * L<CELL|Excel::Template::Element::Cell>
+
+This is the actual cell in a spreadsheet.
+
+=item * L<FORMULA|Excel::Template::Element::Formula>
+
+This is a formula in a spreadsheet.
+
+=item * L<RANGE|Excel::Template::Element::Range>
+
+This is a BACKREF for a number of identically-named cells.
+
+=item * L<VAR|Excel::Template::Element::Var>
+
+This is a variable. It is generally used when the 'text' attribute isn't
+sufficient.
 
 =back 4
 
@@ -328,17 +362,16 @@ None, that I know of.
 
 =head1 SUPPORT
 
-This is currently beta-quality software. The featureset is extremely limited,
-but I expect to be adding on to it very soon.
+This is production quality software, used in several production web
+applications.
 
 =head1 AUTHOR
 
-    Rob Kinyon
-    rob.kinyon@gmail.com
+    Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 CONTRIBUTORS
 
-There is a mailing list at http://groups-beta.google.com/group/ExcelTemplate
+There is a mailing list at http://groups.google.com/group/ExcelTemplate
 
 Robert Graff -
 

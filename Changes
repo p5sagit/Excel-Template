@@ -1,5 +1,11 @@
 Revision history for Perl distribution Excel::Template
 
+0.19 Wed Dec 08 12:00:00 2004
+    - Fixed META.yml
+    - Added more values to the MANIFEST.SKIP
+    - Fixed PM_FILTER to work on Win32 (Thanks, Corion!)
+    - Improved POD
+
 0.18 Fri Nov 12 14:45:00 2004
     - Removed 'use warnings' from all tests
     - All warnings are suppressed unless $^W is true

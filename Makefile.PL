@@ -17,11 +17,10 @@ my $prereqs = {
 my $use_unicode = 0;
 if ($] < 5.008)
 {
-    print "Do you want Unicode support? ";
+    print "Do you want Unicode support (y/N)? ";
     my $answer = <STDIN>;
-    my $need_unicode = $answer =~ /^[Yy]/;
 
-    if ($need_unicode)
+    if ($answer =~ /^[Yy]/)
     {
             $prereqs->{'Unicode::String'} = '0.01';
             $use_unicode = 1;
@@ -29,8 +28,9 @@ if ($] < 5.008)
 }
 
 my $pm_filter = $use_unicode
-    ? q{perl -pi -e "s!UNI_YES ! !g;s!UNI_NO  !\\#!g"}
-    : q{perl -pi -e "s!UNI_NO  ! !g;s!UNI_YES !\\#!g"};
+    ? q{perl -pi.old -e "s!UNI_YES ! !g;s!UNI_NO  !\\#!g"}
+    : q{perl -pi.old -e "s!UNI_NO  ! !g;s!UNI_YES !\\#!g"}
+;
 
 WriteMakefile(
     NAME         => 'Excel::Template',
