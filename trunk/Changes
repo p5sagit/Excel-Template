@@ -1,0 +1,55 @@
+Revision history for Perl module Excel::Template
+
+0.12 Thu Apr 08 07:30:00 2004
+        - Fixed bug regarding empty arrays as loop variables
+
+0.11 Wed Mar 17 16:00:00 2004
+        - Fixed bug introduced in 0.10 (Loops were not case-insensitive)
+
+0.10 Wed Mar 17 16:00:00 2004
+        - Parameters are now case-insensitive
+
+0.09 Mon Feb 02 16:00:00 2004
+        - Fixed bug with multiple worksheets
+
+0.08 Fri Jan 30 14:00:00 2004
+        - Added Base to the params for XML::Parser to allow for entity includes
+
+0.07 Fri Jan 23 08:30:00 2004
+        - Fixed the MANIFEST to account for missing files
+
+0.06 Mon Jan 20 11:00:00 2004
+        - Added formulas (no back-references yet)
+        - Improved POD a little
+
+0.05 Wed Jan 16 12:30:00 2004
+        - Fixed a bug in formats
+
+0.04 Wed Jan 16 12:00:00 2004
+        - Added BIG_FILES as an option, which will use
+          Spreadsheet::WriteExcel::Big as the renderer (yet unimplemented)
+        - Changed the output() method to use a tied IO::Scalar (which is
+          now a requirement.
+        - Firmed up the infrastructure in Excel::Template::Format
+        - Added the following tags
+            - FORMAT
+            - HIDDEN
+            - LOCKED
+            - OUTLINE
+            - SHADOW
+            - STRIKEOUT
+
+0.03 Wed Dec 03 20:30:00 2003
+        - Added XML::Parser as a required pre-requisite module
+        - Added Italic format
+        - Removed $VERSION from Excel::Template::Base (Unneeded)
+        - No documentation or testing changes
+
+0.02 Sun Nov 30 17:00:00 2003
+        - documentation improvements
+        - No actual functional changes
+
+0.01 Tue Nov 18 14:23:42 2003
+        - original version; created by ExtUtils::ModuleMaker 0.32
+
+
