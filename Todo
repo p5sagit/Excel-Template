@@ -1,9 +1,6 @@
-TODO list for Perl module Excel::Template
+TODO list for Perl distribution Excel::Template
 
-- Add more formatting options, such as italic
-- Add fonts
-- Add numeric/string formats
-- Figure out how to add support for formulas, especially in <LOOP>s
 - Figure out if and how to add support for charts
+- Add tests for LOOP, SCOPE, CONDITIONAL, BACKREF, and RANGE
+- Add more stringent tests for what we already have
 - Anything else people suggest
-

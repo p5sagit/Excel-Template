@@ -76,7 +76,7 @@ use strict;
             for grep { $boolean_parts[$_] } 0 .. $#_boolean_formats;
 
         $params{ $_integer_formats[$_] } = $integer_parts[$_]
-            for grep { length $integer_parts[$_] } 0 .. $#_integer_formats;
+            for grep { defined $integer_parts[$_] } 0 .. $#_integer_formats;
 
         $params{ $_string_formats[$_] } = $string_parts[$_]
             for grep { $string_parts[$_] } 0 .. $#_string_formats;
@@ -88,6 +88,9 @@ use strict;
     {
         shift;
         my ($context, $old_fmt, %properties) = @_;
+
+        # This is a key used for non-format book-keeping.
+        delete $properties{ ELEMENTS };
 
         defined(my $key = _retrieve_key($old_fmt))
             || die "Internal Error: Cannot find key for format '$old_fmt'!\n";
@@ -111,6 +114,8 @@ use strict;
                     next PROPERTY;
                 }
             }
+
+            warn "Property '$prop' is unrecognized\n";
         }
 
         my $new_key = _params_to_key(%params);
