@@ -51,7 +51,7 @@ Excel::Template::Element
 
 This is the name of the reference to look up.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

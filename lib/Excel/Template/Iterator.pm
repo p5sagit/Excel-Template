@@ -188,24 +188,62 @@ Excel::Template::Iterator
 
 =head1 PURPOSE
 
+This is meant for internal use only. Documentation is provided for subclassing.
+
 =head1 NODE NAME
+
+None
 
 =head1 INHERITANCE
 
+None
+
 =head1 ATTRIBUTES
+
+None
 
 =head1 CHILDREN
 
+None
+
 =head1 AFFECTS
+
+This is a helper class for LOOP
 
 =head1 DEPENDENCIES
 
-=head1 USAGE
+None
+
+=head1 METHODS
+
+=head2 back_up
+
+Go to the previous iteration of the loop
+
+=head2 can_continue
+
+Determines if the iterator can continue.
+
+Currently, this wraps more_params(), but there other possible situations, such as the page ending.
+
+=head2 more_params
+
+Determines if the iterator for the loop has more parameters that it can consume
+
+=head2 next
+
+Go to the next iteration of the loop
+
+=head2 reset
+
+Resets the iterator
 
 =head1 AUTHOR
 
 Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
+
+LOOP
 
 =cut

@@ -67,7 +67,7 @@ Excel::Template::Container
 
 Sets the height of the row. The last setting for a given row will win out.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

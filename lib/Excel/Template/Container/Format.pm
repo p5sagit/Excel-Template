@@ -52,12 +52,11 @@ Excel::Template::Container
 
 =head1 ATTRIBUTES
 
-=over 4
-
 Boolean attributes should be set to 1, 0, true, or false.
 
 Color values can be the color name or the color index. See http://search.cpan.org/~jmcnamara/Spreadsheet-WriteExcel-2.11/lib/Spreadsheet/WriteExcel.pm#COLOURS_IN_EXCEL
 
+=over 4
 
 =item * align
 
@@ -193,7 +192,7 @@ See border_color
 
 Set to top, vcenter, bottom, or vjustify. Default is vcenter. See also align.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

@@ -17,7 +17,7 @@ my %isOp = (
     (map { $_ => $_ } ( 'gt', 'lt', 'eq', 'ne', 'ge', 'le' )),
 );
 
-sub conditional_passes
+sub _conditional_passes
 {
     my $self = shift;
     my ($context) = @_;
@@ -82,7 +82,7 @@ sub render
     my $self = shift;
     my ($context) = @_;
 
-    return 1 unless $self->conditional_passes($context);
+    return 1 unless $self->_conditional_passes($context);
 
     return $self->iterate_over_children($context);
 }
@@ -92,7 +92,7 @@ sub max_of
     my $self = shift;
     my ($context, $attr) = @_;
 
-    return 0 unless $self->conditional_passes($context);
+    return 0 unless $self->_conditional_passes($context);
 
     return $self->SUPER::max_of($context, $attr);
 }
@@ -102,7 +102,7 @@ sub total_of
     my $self = shift;
     my ($context, $attr) = @_;
 
-    return 0 unless $self->conditional_passes($context);
+    return 0 unless $self->_conditional_passes($context);
 
     return $self->SUPER::total_of($context, $attr);
 }
@@ -151,7 +151,7 @@ string comparison operators. All 6 of each kind is supported.
 If VALUE is not set, then IS is checked. IS is allowed to be either "TRUE" or
 "FALSE". The boolean value of NAME is checked against IS.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

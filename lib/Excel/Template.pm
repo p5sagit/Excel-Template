@@ -6,13 +6,23 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.20';
+    $VERSION  = '0.21';
     @ISA      = qw( Excel::Template::Base );
 }
 
 use File::Basename;
 use XML::Parser;
 use IO::Scalar;
+
+use constant RENDER_NML => 'normal';
+use constant RENDER_BIG => 'big';
+use constant RENDER_XML => 'xml';
+
+my %renderers = (
+    RENDER_NML, 'Spreadsheet::WriteExcel',
+    RENDER_BIG, 'Spreadsheet::WriteExcel::Big',
+    RENDER_XML, 'Spreadsheet::WriteExcelXML',
+);
 
 sub new
 {
@@ -23,14 +33,22 @@ sub new
         if defined $self->{FILENAME};
 
     my @renderer_classes = ( 'Spreadsheet::WriteExcel' );
-    if (exists $self->{BIG_FILE} && $self->{BIG_FILE})
-    {
-        unshift @renderer_classes, 'Spreadsheet::WriteExcel::Big';
-    }
 
-    if (exists $self->{XML} && $self->{XML})
+    if (exists $self->{RENDERER} && $self->{RENDERER})
     {
-        unshift @renderer_classes, 'Spreadsheet::WriteExcelXML';
+        if (exists $renderers{ lc $self->{RENDERER} })
+        {
+            unshift @renderer_classes, $renderers{ lc $self->{RENDERER} };
+        }
+        elsif ($^W)
+        {
+            warn "'$self->{RENDERER}' is not recognized\n";
+        }
+    }
+    elsif (exists $self->{BIG_FILE} && $self->{BIG_FILE})
+    {
+        warn "Use of BIG_FILE is deprecated.\n";
+        unshift @renderer_classes, 'Spreadsheet::WriteExcel::Big';
     }
 
     $self->{RENDERER} = undef;
@@ -120,7 +138,7 @@ sub parse_xml
 
                 my $name = uc shift;
 
-                my $node = Excel::Template::Factory->create_node($name, @_);
+                my $node = Excel::Template::Factory->_create_node($name, @_);
                 die "'$name' (@_) didn't make a node!\n" unless defined $node;
 
                 if ( $node->isa( 'WORKBOOK' ) )
@@ -186,7 +204,7 @@ sub _prepare_output
     my $self = shift;
     my ($xls) = @_;
 
-    my $context = Excel::Template::Factory->create(
+    my $context = Excel::Template::Factory->_create(
         'CONTEXT',
 
         XLS       => $xls,
@@ -275,13 +293,33 @@ This creates a Excel::Template object. If passed a FILENAME parameter, it will
 parse the template in the given file. (You can also use the parse() method,
 described below.)
 
-new() accepts an optional BIG_FILE parameter. This will attempt to change the
-renderer from L<Spreadsheet::WriteExcel> to L<Spreadsheet::WriteExcel::Big>. You
-must already have L<OLE::Storage_Lite> (required by Spreadsheet::WriteExcel::Big) installed on your system.
+=head3 Parameters
 
-new() also accepts an optional USE_UNICODE parameter. This will use
-L<Unicode::String> to represent strings instead of Perl's internal string
-handling. You must already have L<Unicode::String> installed on your system.
+=over 4
+
+=item * RENDERER
+
+The default rendering engine is Spreadsheet::WriteExcel. You may, if you choose, change that to another choice. The legal values are:
+
+=over 4
+
+=item * Excel::Template->RENDER_NML
+
+This is the default of Spreadsheet::WriteExcel.
+
+=item * Excel::Template->RENDER_BIG
+
+This attempts to load Spreadsheet::WriteExcel::Big.
+
+=item * Excel::Template->RENDER_XML
+
+This attempts to load Spreadsheet::WriteExcelXML.
+
+=back
+
+=item * USE_UNICODE
+
+This will use L<Unicode::String> to represent strings instead of Perl's internal string handling. You must already have L<Unicode::String> installed on your system.
 
 The USE_UNICODE parameter will be ignored if you are using Perl 5.8 or higher as
 Perl's internal string handling is unicode-aware.
@@ -289,6 +327,18 @@ Perl's internal string handling is unicode-aware.
 NOTE: Certain older versions of L<OLE::Storage_Lite> and mod_perl clash for some
 reason. Upgrading to the latest version of L<OLE::Storage_Lite> should fix the
 problem.
+
+=back
+
+=head3 Deprecated
+
+=over 4
+
+=item * BIG_FILE
+
+Instead, use RENDERER => Excel::Template->RENDER_BIG
+
+=back
 
 =head2 param()
 
@@ -310,6 +360,10 @@ is when the actual merging of the template and the parameters occurs.)
 It will act just like HTML::Template's output() method, returning the resultant
 file as a stream, usually for output to the web. (This is when the actual
 merging of the template and the parameters occurs.)
+
+=head2 register()
+
+This allows you to register a class as handling a node. q.v. L<Excel::Template::Factory> for more info.
 
 =head1 SUPPORTED NODES
 
@@ -371,7 +425,7 @@ This is a BACKREF for a number of identically-named cells.
 This is a variable. It is generally used when the 'text' attribute isn't
 sufficient.
 
-=back 4
+=back
 
 =head1 BUGS
 
@@ -398,7 +452,7 @@ Robert Graff -
 
 =item * Fixing several bugs in worksheet naming
 
-=back 4
+=back
 
 =head1 COPYRIGHT
 

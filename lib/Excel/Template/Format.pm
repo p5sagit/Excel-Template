@@ -146,3 +146,55 @@ sub blank_format
 
 1;
 __END__
+
+=head1 NAME
+
+Excel::Template::Format - Excel::Template::Format
+
+=head1 PURPOSE
+
+Helper class for FORMAT
+
+=head1 NODE NAME
+
+None
+
+=head1 INHERITANCE
+
+None
+
+=head1 ATTRIBUTES
+
+None
+
+=head1 CHILDREN
+
+None
+
+=head1 EFFECTS
+
+None
+
+=head1 DEPENDENCIES
+
+None
+
+=head1 METHODS
+
+=head2 blank_format
+
+Provides a blank format for use
+
+=head2 copy
+
+Clones an existing format, so that a new format can be built from it
+
+=head1 AUTHOR
+
+Rob Kinyon (rob.kinyon@gmail.com)
+
+=head1 SEE ALSO
+
+FORMAT
+
+=cut

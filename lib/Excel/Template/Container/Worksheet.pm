@@ -59,7 +59,7 @@ value is set will be used as the password.
 
 This activates the HIDDEN and LOCKED nodes.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

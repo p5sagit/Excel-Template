@@ -107,7 +107,7 @@ sub register
     return 1;
 }
 
-sub create
+sub _create
 {
     my $class = shift;
     my $name = uc shift;
@@ -125,14 +125,14 @@ sub create
     return $Manifest{$name}->new(@_);
 }
 
-sub create_node
+sub _create_node
 {
     my $class = shift;
     my $name = uc shift;
 
     return unless exists $isBuildable{$name};
 
-    return $class->create($name, @_);
+    return $class->_create($name, @_);
 }
 
 sub isa
@@ -147,7 +147,7 @@ sub is_embedded
 {
     return unless @_ >= 1;
 
-    isa( $_[0], $_ ) && return !!1 for qw( VAR BACKREF RANGE );
+    isa( $_[0], $_ ) && return ~~1 for qw( VAR BACKREF RANGE );
     return;
 }
 
@@ -169,6 +169,14 @@ To provide a common way to instantiate Excel::Template nodes
 Use this to register your own nodes.
 
 Example forthcoming.
+
+=head1 METHODS
+
+=head2 isa
+
+This is a customized isa() wrapper for syntactic sugar
+
+=head2 is_embedded
 
 =head1 AUTHOR
 

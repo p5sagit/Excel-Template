@@ -77,3 +77,47 @@ sub render
 
 1;
 __END__
+
+=head1 NAME
+
+Excel::Template::Base - Excel::Template::Base
+
+=head1 PURPOSE
+
+Base class for all Excel::Template classes
+
+=head1 NODE NAME
+
+None
+
+=head1 INHERITANCE
+
+None
+
+=head1 ATTRIBUTES
+
+None
+
+=head1 CHILDREN
+
+None
+
+=head1 EFFECTS
+
+None
+
+=head1 DEPENDENCIES
+
+None
+
+=head1 METHODS
+
+None
+
+=head1 AUTHOR
+
+Rob Kinyon (rob.kinyon@gmail.com)
+
+=head1 SEE ALSO
+
+=cut

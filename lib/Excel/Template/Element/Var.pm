@@ -38,7 +38,7 @@ Excel::Template::Element
 
 This is the name of the parameter to substitute here.
 
-=back 4
+=back
 
 =head1 CHILDREN
 

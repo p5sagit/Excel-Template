@@ -14,12 +14,12 @@ sub new
     my $class = shift;
     my $self = $class->SUPER::new(@_);
                                                                                 
-    $self->{TXTOBJ} = Excel::Template::Factory->create('TEXTOBJECT');
+    $self->{TXTOBJ} = Excel::Template::Factory->_create('TEXTOBJECT');
                                                                                 
     return $self;
 }
 
-sub get_text
+sub _get_text
 {
     my $self = shift;
     my ($context) = @_;
@@ -27,7 +27,7 @@ sub get_text
     my $txt = $context->get($self, 'TEXT');
     if (defined $txt)
     {
-        my $txt_obj = Excel::Template::Factory->create('TEXTOBJECT');
+        my $txt_obj = Excel::Template::Factory->_create('TEXTOBJECT');
         push @{$txt_obj->{STACK}}, $txt;
         $txt = $txt_obj->resolve($context);
     }
@@ -100,7 +100,7 @@ sub render
 
     $context->active_worksheet->$method(
         $row, $col,
-        $self->get_text($context),
+        $self->_get_text($context),
         $context->active_format,
     );
 

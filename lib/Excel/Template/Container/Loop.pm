@@ -26,12 +26,12 @@ sub new
     return $self;
 }
 
-sub make_iterator
+sub _make_iterator
 {
     my $self = shift;
     my ($context) = @_;
 
-    return Excel::Template::Factory->create('ITERATOR',
+    return Excel::Template::Factory->_create('ITERATOR',
         NAME     => $context->get($self, 'NAME'),
         MAXITERS => $context->get($self, 'MAXITERS'),
         CONTEXT  => $context,
@@ -45,7 +45,7 @@ sub render
 
     unless ($self->{ITERATOR} && $self->{ITERATOR}->more_params)
     {
-        $self->{ITERATOR} = $self->make_iterator($context);
+        $self->{ITERATOR} = $self->_make_iterator($context);
     }
     my $iterator = $self->{ITERATOR};
 
@@ -74,7 +74,7 @@ sub total_of
     my $self = shift;
     my ($context, $attr) = @_;
 
-    my $iterator = $self->make_iterator($context);
+    my $iterator = $self->_make_iterator($context);
 
     my $total = 0;
 
@@ -94,7 +94,7 @@ sub max_of
     my $self = shift;
     my ($context, $attr) = @_;
 
-    my $iterator = $self->make_iterator($context);
+    my $iterator = $self->_make_iterator($context);
 
     my $max = $context->get($self, $attr);
 
@@ -139,7 +139,7 @@ Excel::Template::Container
 This is the name of the loop. It's used to identify within the parameter set
 what variables to expose to the children nodes each iteration.
 
-=back 4
+=back
 
 =head1 CHILDREN
 
