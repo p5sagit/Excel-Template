@@ -9,30 +9,13 @@ BEGIN {
     use Excel::Template::Element::Cell;
 }
 
-sub get_text
-{
-    my $self = shift;
-    my ($context) = @_;
-
-    my $text = $self->SUPER::get_text($context);
-
-# At this point, we must do back-reference dereferencing
-
-    return $text;
-}
-
-sub render
-{
-    my $self = shift;
-    my ($context) = @_;
-
-    $context->active_worksheet->write_formula(
-        (map { $context->get($self, $_) } qw(ROW COL)),
-        $self->get_text($context),
-    );
-
-    return 1;
-}
+sub render { $_[0]->SUPER::render( $_[1], 'write_formula' ) }
+#{
+#    my $self = shift;
+#    my ($context) = @_;
+#
+#    return $self->SUPER::render( $context, 'write_formula' );
+#}
 
 1;
 __END__
@@ -55,22 +38,8 @@ Excel::Template::Element::Cell
 
 =head1 ATTRIBUTES
 
-=over 4
-
-=item * TEXT
-
-This is the formula to write to the cell. This can either be text or a parameter
-with a dollar-sign in front of the parameter name.
-
-=item * COL
-
-Optionally, you can specify which column you want this cell to be in. It can be
-either a number (zero-based) or an offset. See Excel::Template for more info on
-offset-based numbering.
-
-=back 4
-
-There will be more parameters added, as features are added.
+All attributes a CELL can have, a FORMULA can have, including the ability to be
+referenced using the 'ref' attribute.
 
 =head1 CHILDREN
 
@@ -104,6 +73,6 @@ Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
-ROW, VAR, CELL
+CELL
 
 =cut

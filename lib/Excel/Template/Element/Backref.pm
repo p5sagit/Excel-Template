@@ -37,7 +37,7 @@ return the location of the entire range of cells to name this reference see RANG
 
 =head1 NODE NAME
 
-REF
+BACKREF
 
 =head1 INHERITANCE
 

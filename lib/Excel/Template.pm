@@ -6,13 +6,12 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.15';
+    $VERSION  = '0.16';
     @ISA      = qw( Excel::Template::Base );
 }
 
 use File::Basename;
 use XML::Parser;
-use IO::File;
 use IO::Scalar;
 
 sub new
@@ -67,7 +66,7 @@ sub param
     $params{uc $_} = delete $params{$_} for keys %params;
     @{$self->{PARAM_MAP}}{keys %params} = @params{keys %params};
 
-    return 1;
+    return !!1;
 }
 
 sub write_file
@@ -82,7 +81,7 @@ sub write_file
 
     $xls->close;
 
-    return 1;
+    return !!1;
 }
 
 sub output
@@ -95,13 +94,6 @@ sub output
     $self->write_file(\*XLS);
 
     return $output;
-}
-
-sub parse
-{
-    my $self = shift;
-
-    $self->parse_xml(@_);
 }
 
 sub parse_xml
@@ -169,16 +161,17 @@ sub parse_xml
     );
 
     {
-        my $fh = IO::File->new($fname)
+        open( INFILE, "<$fname" )
             || die "Cannot open '$fname' for reading: $!\n";
 
-        $parser->parse(do { local $/ = undef; <$fh> });
+        $parser->parse(do { local $/ = undef; <INFILE> });
 
-        $fh->close;
+        close INFILE;
     }
 
-    return 1;
+    return !!1;
 }
+*parse = \&parse_xml;
 
 sub _prepare_output
 {
@@ -194,7 +187,7 @@ sub _prepare_output
 
     $_->render($context) for @{$self->{WORKBOOKS}};
 
-    return 1;
+    return !!1;
 }
 
 sub register { shift; Excel::Template::Factory::register(@_) }

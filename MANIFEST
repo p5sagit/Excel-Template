@@ -1,4 +1,5 @@
 MANIFEST
+MANIFEST.SKIP
 LICENSE
 README
 Todo
@@ -11,7 +12,7 @@ lib/Excel/Template/Element.pm
 lib/Excel/Template/Factory.pm
 lib/Excel/Template/Format.pm
 lib/Excel/Template/Iterator.pm
-lib/Excel/Template/TextObject.pm_
+lib/Excel/Template/TextObject.pm
 lib/Excel/Template/Container/Bold.pm
 lib/Excel/Template/Container/Conditional.pm
 lib/Excel/Template/Container/Format.pm
@@ -27,10 +28,27 @@ lib/Excel/Template/Container/Shadow.pm
 lib/Excel/Template/Container/Workbook.pm
 lib/Excel/Template/Container/Worksheet.pm
 lib/Excel/Template/Element/Backref.pm
-lib/Excel/Template/Element/Cell.pm_
+lib/Excel/Template/Element/Cell.pm
 lib/Excel/Template/Element/Formula.pm
 lib/Excel/Template/Element/Range.pm
 lib/Excel/Template/Element/Var.pm
 t/001_load.t
+t/002_workbook.t
+t/002.xml
+t/003_worksheet.t
+t/003.xml
+t/004_cell.t
+t/004.xml
+t/005_formats.t
+t/005.xml
+t/006_variables.t
+t/006.xml
+t/007_cell_formats.t
+t/007.xml
+t/008_formula.t
+t/008.xml
+t/mock.pm
+t/Spreadsheet/WriteExcel.pm
+t/Spreadsheet/WriteExcel/Worksheet.pm
 Makefile.PL
 META.yml                                 Module meta-data (added by MakeMaker)

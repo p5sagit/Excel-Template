@@ -47,7 +47,9 @@ UNI_NO         $txt = '';
 sub render
 {
     my $self = shift;
-    my ($context) = @_;
+    my ($context, $method) = @_;
+
+    $method ||= 'write';
 
     my ($row, $col) = map { $context->get($self, $_) } qw(ROW COL);
 
@@ -57,7 +59,7 @@ sub render
         $context->add_reference( $ref, $row, $col );
     }
 
-    $context->active_worksheet->write(
+    $context->active_worksheet->$method(
         $row, $col,
         $self->get_text($context),
         $context->active_format,
@@ -107,6 +109,12 @@ Optionally, you can specify which column you want this cell to be in. It can be
 either a number (zero-based) or an offset. See Excel::Template for more info on
 offset-based numbering.
 
+=item * REF
+
+Adds the current cell to the a list of cells that can be backreferenced.
+This is useful when the current cell needs to be referenced by a
+formula. See BACKREF and RANGE.
+
 =back 4
 
 There will be more parameters added, as features are added.
@@ -138,11 +146,6 @@ middle, you have to use the latter form. Variables within parameters are the
 entire parameter's value.
 
 Please see Spreadsheet::WriteExcel for what constitutes a legal formula.
-
-=head1 BACK-REFERENCES
-
-Currently, you can only use a hard-coded formula. The next release will add the
-capability to have a formula reference other nodes in the template dynamically.
 
 =head1 AUTHOR
 
