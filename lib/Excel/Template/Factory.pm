@@ -60,6 +60,7 @@ BEGIN {
     BACKREF
     RANGE
     ROW
+    SCOPE
     SHADOW
     STRIKEOUT
     VAR

@@ -1,6 +1,6 @@
 TODO list for Perl distribution Excel::Template
 
 - Figure out if and how to add support for charts
-- Add tests for LOOP, SCOPE, CONDITIONAL, BACKREF, and RANGE
-- Add more stringent tests for what we already have
+- Add more stringent tests
+- Add colspan (COL), rowspan (ROW), width (CELL), and height (ROW)
 - Anything else people suggest
