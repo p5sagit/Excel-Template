@@ -151,33 +151,45 @@ sub next
     return 1;
 }
 
-sub back_up
-{
-    my $self = shift;
+# This method doesn't seem to be used ...
+# If it is reinstated, here's the POD for it
+#=head2 back_up
+#
+#Go to the previous iteration of the loop
+#
+#sub back_up
+#{
+#    my $self = shift;
+#
+#    return 0 if $self->{NO_PARAMS};
+#
+#    $self->exit_scope;
+#
+#    $self->{INDEX}--;
+#
+#    $self->_do_globals;
+#
+#    $self->enter_scope;
+#
+#    return 1;
+#}
 
-    return 0 if $self->{NO_PARAMS};
-
-    $self->exit_scope;
-
-    $self->{INDEX}--;
-
-    $self->_do_globals;
-
-    $self->enter_scope;
-
-    return 1;
-}
-
-sub reset
-{
-    my $self = shift;
-
-    return 0 if $self->{NO_PARAMS};
-
-    $self->{INDEX} = -1;
-
-    return 1;
-}
+# This method doesn't seem to be used ...
+# If it is reinstated, here's the POD for it
+#=head2 reset
+#
+#Resets the iterator
+#
+#sub reset
+#{
+#    my $self = shift;
+#
+#    return 0 if $self->{NO_PARAMS};
+#
+#    $self->{INDEX} = -1;
+#
+#    return 1;
+#}
 
 1;
 __END__
@@ -216,10 +228,6 @@ None
 
 =head1 METHODS
 
-=head2 back_up
-
-Go to the previous iteration of the loop
-
 =head2 can_continue
 
 Determines if the iterator can continue.
@@ -233,10 +241,6 @@ Determines if the iterator for the loop has more parameters that it can consume
 =head2 next
 
 Go to the next iteration of the loop
-
-=head2 reset
-
-Resets the iterator
 
 =head1 AUTHOR
 

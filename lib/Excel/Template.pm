@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.22';
+    $VERSION  = '0.23';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -226,13 +226,12 @@ sub _prepare_output
         UNICODE   => $self->{UNICODE},
     );
 
-#    print "@{$self->{WORKBOOKS}}\n";
     $_->render($context) for @{$self->{WORKBOOKS}};
 
     return ~~1;
 }
 
-sub register { shift; Excel::Template::Factory::register(@_) }
+sub register { shift; Excel::Template::Factory->register(@_) }
 
 1;
 __END__
@@ -250,14 +249,17 @@ For example, test.xml:
 
   <workbook>
       <worksheet name="tester">
-          <cell text="$HOME"/>
-          <cell text="$PATH"/>
+          <cell text="$HOME" />
+          <cell text="$PATH" />
       </worksheet>
   </workbook>
 
 Now, create a small program to use it:
 
   #!/usr/bin/perl -w
+
+  use strict;
+
   use Excel::Template;
 
   # Create the Excel template
@@ -273,8 +275,7 @@ Now, create a small program to use it:
 
   $template->write_file('test.xls');
 
-If everything worked, then you should have a spreadsheet in your work directory
-that looks something like:
+If everything worked, then you should have a spreadsheet called text.xls in your working directory that looks something like:
 
              A                B                C
     +----------------+----------------+----------------
@@ -286,19 +287,11 @@ that looks something like:
 
 =head1 DESCRIPTION
 
-This is a module used for templating Excel files. Its genesis came from the
-need to use the same datastructure as HTML::Template, but provide Excel files
-instead. The existing modules don't do the trick, as they require replication
-of logic that's already been done within HTML::Template.
+This is a module used for templating Excel files. Its genesis came from the need to use the same datastructure as L<HTML::Template>, but provide Excel files instead. The existing modules don't do the trick, as they require replication of logic that's already been done within L<HTML::Template>.
 
 =head1 MOTIVATION
 
-I do a lot of Perl/CGI for reporting purposes. In nearly every place I've been,
-I've been asked for HTML, PDF, and Excel. HTML::Template provides the first, and
-PDF::Template does the second pretty well. But, generating Excel was the
-sticking point. I already had the data structure for the other templating
-modules, but I just didn't have an easy mechanism to get that data structure
-into an XLS file.
+I do a lot of Perl/CGI for reporting purposes. In nearly every place I've been, I've been asked for HTML, PDF, and Excel. L<HTML::Template> provides the first, and L<PDF::Template> does the second pretty well. But, generating Excel was the sticking point. I already had the data structure for the other templating modules, but I just didn't have an easy mechanism to get that data structure into an XLS file.
 
 =head1 USAGE
 
@@ -320,21 +313,21 @@ If you want to use the __DATA__ section, you can do so by passing
 
 =item * RENDERER
 
-The default rendering engine is Spreadsheet::WriteExcel. You may, if you choose, change that to another choice. The legal values are:
+The default rendering engine is L<Spreadsheet::WriteExcel>. You may, if you choose, change that to another choice. The legal values are:
 
 =over 4
 
 =item * Excel::Template->RENDER_NML
 
-This is the default of Spreadsheet::WriteExcel.
+This is the default of L<Spreadsheet::WriteExcel>.
 
 =item * Excel::Template->RENDER_BIG
 
-This attempts to load Spreadsheet::WriteExcel::Big.
+This attempts to load L<Spreadsheet::WriteExcel::Big>.
 
 =item * Excel::Template->RENDER_XML
 
-This attempts to load Spreadsheet::WriteExcelXML.
+This attempts to load L<Spreadsheet::WriteExcelXML>.
 
 =back
 
@@ -342,12 +335,9 @@ This attempts to load Spreadsheet::WriteExcelXML.
 
 This will use L<Unicode::String> to represent strings instead of Perl's internal string handling. You must already have L<Unicode::String> installed on your system.
 
-The USE_UNICODE parameter will be ignored if you are using Perl 5.8 or higher as
-Perl's internal string handling is unicode-aware.
+The USE_UNICODE parameter will be ignored if you are using Perl 5.8 or higher as Perl's internal string handling is unicode-aware.
 
-NOTE: Certain older versions of L<OLE::Storage_Lite> and mod_perl clash for some
-reason. Upgrading to the latest version of L<OLE::Storage_Lite> should fix the
-problem.
+NOTE: Certain older versions of L<OLE::Storage_Lite> and mod_perl clash for some reason. Upgrading to the latest version of L<OLE::Storage_Lite> should fix the problem.
 
 =back
 
@@ -369,18 +359,15 @@ This method is exactly like L<HTML::Template>'s param() method.
 
 This method actually parses the template file. It can either be called separately or through the new() call. It will die() if it runs into a situation it cannot handle.
 
-If a filename is passed in (vs. a filehandle), the directory name will be passed in to XML::Parser as the I<Base> parameter. This will allow for XML directives to work as expected.
+If a filename is passed in (vs. a filehandle), the directory name will be passed in to L<XML::Parser> as the I<Base> parameter. This will allow for XML directives to work as expected.
 
 =head2 write_file()
 
-Create the Excel file and write it to the specified filename, if possible. (This
-is when the actual merging of the template and the parameters occurs.)
+Create the Excel file and write it to the specified filename, if possible. (This is when the actual merging of the template and the parameters occurs.)
 
 =head2 output()
 
-It will act just like HTML::Template's output() method, returning the resultant
-file as a stream, usually for output to the web. (This is when the actual
-merging of the template and the parameters occurs.)
+It will act just like L<HTML::Template>'s output() method, returning the resultant file as a stream, usually for output to the web. (This is when the actual merging of the template and the parameters occurs.)
 
 =head2 register()
 
@@ -388,18 +375,15 @@ This allows you to register a class as handling a node. q.v. L<Excel::Template::
 
 =head1 SUPPORTED NODES
 
-This is a partial list of nodes. See the other classes in this distro for more
-details on specific parameters and the like.
+This is a partial list of nodes. See the other classes in this distro for more details on specific parameters and the like.
 
-Every node can set the ROW and COL parameters. These are the actual ROW/COL
-values that the next CELL-type tag will write into.
+Every node can set the ROW and COL parameters. These are the actual ROW/COL values that the next CELL-type tag will write into.
 
 =over 4
 
 =item * L<WORKBOOK|Excel::Template::Container::Workbook>
 
-This is the node representing the workbook. It is the parent for all other
-nodes.
+This is the node representing the workbook. It is the parent for all other nodes.
 
 =item * L<WORKSHEET|Excel::Template::Container::Worksheet>
 
@@ -407,8 +391,7 @@ This is the node representing a given worksheet.
 
 =item * L<IF|Excel::Template::Container::Conditional>
 
-This node represents a conditional expression. Its children may or may not be
-rendered. It behaves just like L<HTML::Template>'s TMPL_IF.
+This node represents a conditional expression. Its children may or may not be rendered. It behaves just like L<HTML::Template>'s TMPL_IF.
 
 =item * L<LOOP|Excel::Template::Container::Loop>
 
@@ -420,10 +403,7 @@ This node represents a row of data. This is the A in A1.
 
 =item * L<FORMAT|Excel::Template::Container::Format>
 
-This node varies the format for its children. All formatting options supported
-in L<Spreadsheet::WriteExcel> are supported here. There are also a number of
-formatting shortcuts, such as L<BOLD|Excel::Template::Container::Bold> and
-L<ITALIC|Excel::Template::Container::Italic>.
+This node varies the format for its children. All formatting options supported in L<Spreadsheet::WriteExcel> are supported here. There are also a number of formatting shortcuts, such as L<BOLD|Excel::Template::Container::Bold> and L<ITALIC|Excel::Template::Container::Italic>.
 
 =item * L<BACKREF|Excel::Template::Element::Backref>
 
@@ -454,8 +434,7 @@ None, that I know of.
 
 =head1 SUPPORT
 
-This is production quality software, used in several production web
-applications.
+This is production quality software, used in several production web applications.
 
 =head1 AUTHOR
 
@@ -477,54 +456,52 @@ There is a mailing list at http://groups.google.com/group/ExcelTemplate or excel
 
 =head1 TEST COVERAGE
 
-I used Devel::Cover to test the coverage of my tests. Every release, I intend to improve these numbers.
+I used L<Devel::Cover> to test the coverage of my tests. Every release, I intend to improve these numbers.
 
 Excel::Template is also part of the CPAN Kwalitee initiative, being one of the top 100 non-core modules downloaded from CPAN. If you wish to help out, please feel free to contribute tests, patches, and/or suggestions.
 
----------------------------- ------ ------ ------ ------ ------ ------ ------
-File                           stmt branch   cond    sub    pod   time  total
----------------------------- ------ ------ ------ ------ ------ ------ ------
-blib/lib/Excel/Template.pm     90.4   62.5   58.8   90.5  100.0   30.2   82.0
-...ib/Excel/Template/Base.pm   83.3   50.0   66.7   75.0   88.9    8.2   80.0
-...cel/Template/Container.pm   46.3   20.0   33.3   58.3   85.7    4.6   47.7
-...emplate/Container/Bold.pm  100.0    n/a    n/a  100.0    0.0    0.5   95.0
-.../Container/Conditional.pm   58.5   52.3   66.7   75.0   66.7    0.8   58.4
-...plate/Container/Format.pm  100.0    n/a    n/a  100.0    0.0    0.7   96.6
-...plate/Container/Hidden.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
-...plate/Container/Italic.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
-...plate/Container/Locked.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
-...emplate/Container/Loop.pm   55.6   40.0   50.0   77.8   75.0    0.5   56.6
-...late/Container/Outline.pm   71.4    n/a    n/a   80.0    0.0    0.0   70.0
-...Template/Container/Row.pm  100.0   75.0    n/a  100.0   50.0    0.3   93.8
-...mplate/Container/Scope.pm  100.0    n/a    n/a  100.0    n/a    0.1  100.0
-...plate/Container/Shadow.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
-...te/Container/Strikeout.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
-...ate/Container/Workbook.pm  100.0    n/a    n/a  100.0    n/a    1.0  100.0
-...te/Container/Worksheet.pm   94.1   50.0    n/a  100.0    0.0    0.9   88.0
-...Excel/Template/Context.pm   83.1   53.4   54.2   95.0   92.9   19.1   75.2
-...Excel/Template/Element.pm  100.0    n/a    n/a  100.0    n/a    0.4  100.0
-...mplate/Element/Backref.pm  100.0   50.0   33.3  100.0    0.0    0.1   87.1
-.../Template/Element/Cell.pm   95.8   65.0   80.0  100.0   66.7    3.6   86.9
-...mplate/Element/Formula.pm  100.0    n/a    n/a  100.0    0.0    0.3   94.1
-...Template/Element/Range.pm  100.0   66.7    n/a  100.0   66.7    0.2   93.3
-...l/Template/Element/Var.pm  100.0    n/a    n/a  100.0    0.0    0.1   94.1
-...Excel/Template/Factory.pm   57.1   34.6    n/a   88.9  100.0   14.3   55.2
-.../Excel/Template/Format.pm   98.3   81.2   33.3  100.0  100.0    8.9   93.2
-...xcel/Template/Iterator.pm   85.2   70.6   70.6   84.6   87.5    1.9   80.4
-...el/Template/TextObject.pm   92.9   62.5   33.3  100.0   50.0    2.7   83.0
-Total                          83.1   56.6   58.3   91.1   98.7  100.0   78.8
----------------------------- ------ ------ ------ ------ ------ ------ ------
+  -----------------------------------------------------------------------
+  File                           stmt brnch  cond   sub   pod  time total
+  -----------------------------------------------------------------------
+  blib/lib/Excel/Template.pm     96.0  62.5  58.8 100.0 100.0  25.2  86.2
+  ...ib/Excel/Template/Base.pm   87.0  50.0  66.7  81.8  87.5   8.7  83.0
+  ...cel/Template/Container.pm   71.4  50.0  33.3  70.0  80.0   4.9  68.4
+  ...emplate/Container/Bold.pm  100.0   n/a   n/a 100.0   0.0   0.7  95.0
+  .../Container/Conditional.pm   64.9  57.5  66.7 100.0   0.0   0.7  63.9
+  ...plate/Container/Format.pm  100.0   n/a   n/a 100.0   0.0   0.7  96.6
+  ...plate/Container/Hidden.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...plate/Container/Italic.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...plate/Container/Locked.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...emplate/Container/Loop.pm   90.9  50.0  50.0 100.0  50.0   0.5  80.4
+  ...late/Container/Outline.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...Template/Container/Row.pm  100.0  75.0   n/a 100.0  50.0   0.3  93.8
+  ...mplate/Container/Scope.pm  100.0   n/a   n/a 100.0   n/a   0.1 100.0
+  ...plate/Container/Shadow.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...te/Container/Strikeout.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
+  ...ate/Container/Workbook.pm  100.0   n/a   n/a 100.0   n/a   0.9 100.0
+  ...te/Container/Worksheet.pm   94.1  50.0   n/a 100.0   0.0   0.9  88.0
+  ...Excel/Template/Context.pm   84.3  53.4  54.2 100.0  92.3  19.5  76.0
+  ...Excel/Template/Element.pm  100.0   n/a   n/a 100.0   n/a   0.5 100.0
+  ...mplate/Element/Backref.pm  100.0  50.0  33.3 100.0   0.0   0.1  87.1
+  .../Template/Element/Cell.pm   95.8  65.0  80.0 100.0  66.7   3.8  86.9
+  ...mplate/Element/Formula.pm  100.0   n/a   n/a 100.0   0.0   0.3  94.1
+  ...Template/Element/Range.pm  100.0  66.7   n/a 100.0  66.7   0.2  93.3
+  ...l/Template/Element/Var.pm  100.0   n/a   n/a 100.0   0.0   0.1  94.1
+  ...Excel/Template/Factory.pm  100.0  73.1   n/a 100.0 100.0  16.3  92.6
+  .../Excel/Template/Format.pm   98.3  81.2  33.3 100.0 100.0  10.0  93.2
+  ...xcel/Template/Iterator.pm   98.6  80.0  70.6 100.0  83.3   1.9  90.3
+  ...el/Template/TextObject.pm   92.9  62.5  33.3 100.0  50.0   3.1  83.0
+  Total                          92.0  63.5  58.3  97.5  98.5 100.0  86.0
+  -----------------------------------------------------------------------
 
 =head1 COPYRIGHT
 
-This program is free software; you can redistribute
-it and/or modify it under the same terms as Perl itself.
+This program is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
 
-The full text of the license can be found in the
-LICENSE file included with this module.
+The full text of the license can be found in the LICENSE file included with this module.
 
 =head1 SEE ALSO
 
-perl(1), HTML::Template, Spreadsheet::WriteExcel.
+perl(1), L<HTML::Template>, L<Spreadsheet::WriteExcel>
 
 =cut

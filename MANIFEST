@@ -64,9 +64,12 @@ t/015.xml
 t/016_renderers.t
 t/016.xml
 t/017_filehandle.t
+t/018_register.t
+t/019_output.t
 t/pod.t
 t/pod_coverage.t
 t/mock.pm
+t/Register_018.pm
 t/Spreadsheet/WriteExcel.pm
 t/Spreadsheet/WriteExcelXML.pm
 t/Spreadsheet/WriteExcel/Worksheet.pm

@@ -87,25 +87,25 @@ sub render
     return $self->iterate_over_children($context);
 }
 
-sub max_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    return 0 unless $self->_conditional_passes($context);
-
-    return $self->SUPER::max_of($context, $attr);
-}
-
-sub total_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    return 0 unless $self->_conditional_passes($context);
-
-    return $self->SUPER::total_of($context, $attr);
-}
+#sub max_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    return 0 unless $self->_conditional_passes($context);
+#
+#    return $self->SUPER::max_of($context, $attr);
+#}
+#
+#sub total_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    return 0 unless $self->_conditional_passes($context);
+#
+#    return $self->SUPER::total_of($context, $attr);
+#}
 
 1;
 __END__

@@ -71,51 +71,51 @@ sub render { $_[0]->iterate_over_children($_[1]) }
 #    return $self->iterate_over_children($context);
 #}
 
-sub max_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    my $max = $context->get($self, $attr);
-
-    ELEMENT:
-    foreach my $e (@{$self->{ELEMENTS}})
-    {
-        $e->enter_scope($context);
-
-        my $v = $e->isa('CONTAINER')
-            ? $e->max_of($context, $attr)
-            : $e->calculate($context, $attr);
-
-        $max = $v if $max < $v;
-
-        $e->exit_scope($context, 1);
-    }
-
-    return $max;
-}
-
-sub total_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    my $total = 0;
-
-    ELEMENT:
-    foreach my $e (@{$self->{ELEMENTS}})
-    {
-        $e->enter_scope($context);
-
-        $total += $e->isa('CONTAINER')
-            ? $e->total_of($context, $attr)
-            : $e->calculate($context, $attr);
-
-        $e->exit_scope($context, 1);
-    }
-
-    return $total;
-}
+#sub max_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    my $max = $context->get($self, $attr);
+#
+#    ELEMENT:
+#    foreach my $e (@{$self->{ELEMENTS}})
+#    {
+#        $e->enter_scope($context);
+#
+#        my $v = $e->isa('CONTAINER')
+#            ? $e->max_of($context, $attr)
+#            : $e->calculate($context, $attr);
+#
+#        $max = $v if $max < $v;
+#
+#        $e->exit_scope($context, 1);
+#    }
+#
+#    return $max;
+#}
+#
+#sub total_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    my $total = 0;
+#
+#    ELEMENT:
+#    foreach my $e (@{$self->{ELEMENTS}})
+#    {
+#        $e->enter_scope($context);
+#
+#        $total += $e->isa('CONTAINER')
+#            ? $e->total_of($context, $attr)
+#            : $e->calculate($context, $attr);
+#
+#        $e->exit_scope($context, 1);
+#    }
+#
+#    return $total;
+#}
 
 1;
 __END__

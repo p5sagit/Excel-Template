@@ -14,6 +14,8 @@ sub new {
         push @mock::calls, ref($self) . "::new( '@_' )";
     }
 
+    $self->{file} = shift;
+
     return $self;
 }
 
@@ -22,6 +24,11 @@ sub close {
     {
         local $" = "', '";
         push @mock::calls, ref($self) . "::close( '@_' )";
+    }
+
+    if ( ref $self->{file} ) {
+        my $fh = $self->{file};
+        print $fh join "\n", @mock::calls, ''; 
     }
 }
 

@@ -69,47 +69,47 @@ sub render
     return 1;
 }
 
-sub total_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    my $iterator = $self->_make_iterator($context);
-
-    my $total = 0;
-
-    $iterator->enter_scope;
-    while ($iterator->can_continue)
-    {
-        $iterator->next;
-        $total += $self->SUPER::total_of($context, $attr);
-    }
-    $iterator->exit_scope;
-
-    return $total;
-}
-
-sub max_of
-{
-    my $self = shift;
-    my ($context, $attr) = @_;
-
-    my $iterator = $self->_make_iterator($context);
-
-    my $max = $context->get($self, $attr);
-
-    $iterator->enter_scope;
-    while ($iterator->can_continue)
-    {
-        $iterator->next;
-        my $v = $self->SUPER::max_of($context, $attr);
-
-        $max = $v if $max < $v;
-    }
-    $iterator->exit_scope;
-
-    return $max;
-}
+#sub total_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    my $iterator = $self->_make_iterator($context);
+#
+#    my $total = 0;
+#
+#    $iterator->enter_scope;
+#    while ($iterator->can_continue)
+#    {
+#        $iterator->next;
+#        $total += $self->SUPER::total_of($context, $attr);
+#    }
+#    $iterator->exit_scope;
+#
+#    return $total;
+#}
+#
+#sub max_of
+#{
+#    my $self = shift;
+#    my ($context, $attr) = @_;
+#
+#    my $iterator = $self->_make_iterator($context);
+#
+#    my $max = $context->get($self, $attr);
+#
+#    $iterator->enter_scope;
+#    while ($iterator->can_continue)
+#    {
+#        $iterator->next;
+#        my $v = $self->SUPER::max_of($context, $attr);
+#
+#        $max = $v if $max < $v;
+#    }
+#    $iterator->exit_scope;
+#
+#    return $max;
+#}
 
 1;
 __END__

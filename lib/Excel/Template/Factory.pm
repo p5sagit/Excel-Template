@@ -46,7 +46,7 @@ BEGIN {
     'BASE'       => 'Excel::Template::Base',
 );
 
-%isBuildable = map { $_ => 1 } qw(
+%isBuildable = map { $_ => ~~1 } qw(
     BOLD
     CELL
     FORMAT
@@ -68,71 +68,86 @@ BEGIN {
     WORKSHEET
 );
 
-sub register
+sub _load_class
 {
-    my %params = @_;
+    my $self = shift;
+    my ($class) = @_;
 
+    (my $filename = $class) =~ s!::!/!g;
+    eval {
+        require "$filename.pm";
+    }; if ($@) {
+        die "Cannot find or compile PM file for '$class' ($filename)\n";
+    }
+
+    return ~~1;
+}
+
+{
     my @param_names = qw(name class isa);
-    for (@param_names)
+    sub register
     {
-        unless ($params{$_})
+        my $self = shift;
+        my %params = @_;
+
+        for (@param_names)
         {
-            warn "$_ was not supplied to register()\n" if $^W;
-            return 0;
+            unless ($params{$_})
+            {
+                warn "$_ was not supplied to register()\n" if $^W;
+                return;
+            }
         }
+
+        my $name = uc $params{name};
+        if (exists $Manifest{$name})
+        {
+            warn "$params{name} already exists in the manifest.\n" if $^W;
+            return;
+        }
+
+        my $isa = uc $params{isa};
+        unless (exists $Manifest{$isa})
+        {
+            warn "$params{isa} does not exist in the manifest.\n" if $^W;
+            return;
+        }
+
+        {
+            no strict 'refs';
+            unshift @{"$params{class}::ISA"}, $Manifest{$isa};
+        }
+
+        $self->_load_class( $Manifest{$isa} );
+        $self->_load_class( $params{class} );
+
+        $Manifest{$name} = $params{class};
+        $isBuildable{$name} = ~~1;
+
+        return ~~1;
     }
-
-    my $name = uc $params{name};
-    if (exists $Manifest{$name})
-    {
-        warn "$params{name} already exists in the manifest.\n" if $^W;
-        return 0;
-    }
-
-    my $isa = uc $params{isa};
-    unless (exists $Manifest{$isa})
-    {
-        warn "$params{isa} does not exist in the manifest.\n" if $^W;
-        return 0;
-    }
-
-    $Manifest{$name} = $params{class};
-    $isBuildable{$name} = 1;
-
-    {
-        no strict 'refs';
-        unshift @{"$params{class}::ISA"}, $Manifest{$isa};
-    }
-
-    return 1;
 }
 
 sub _create
 {
-    my $class = shift;
+    my $self = shift;
     my $name = uc shift;
 
     return unless exists $Manifest{$name};
 
-    (my $filename = $Manifest{$name}) =~ s!::!/!g;
- 
-    eval {
-        require "$filename.pm";
-    }; if ($@) {
-        die "Cannot find or compile PM file for '$name' ($filename)\n";
-    }
+    $self->_load_class( $Manifest{$name} );
  
     return $Manifest{$name}->new(@_);
 }
 
 sub _create_node
 {
-    my $class = shift;
+    my $self = shift;
     my $name = uc shift;
 
     return unless exists $isBuildable{$name};
 
-    return $class->_create($name, @_);
+    return $self->_create($name, @_);
 }
 
 sub isa

@@ -29,7 +29,8 @@ sub new
     $self->{ACTIVE_FORMAT}    = Excel::Template::Format->blank_format($self);
     $self->{WORKSHEET_NAMES}  = undef;
 
-    for (qw( STACK PARAM_MAP NAME_MAP ))
+    # Removed NAME_MAP until I figure out what the heck it's for
+    for (qw( STACK PARAM_MAP ))
     {
         next if defined $self->{$_} && UNIVERSAL::isa($self->{$_}, 'ARRAY');
         $self->{$_} = [];
@@ -75,14 +76,14 @@ sub param
     );
 }
 
-sub named_param
-{
-    my $self = shift;
-    $self->_find_param_in_map(
-        'NAME_MAP',
-        @_,
-    );
-}
+#sub named_param
+#{
+#    my $self = shift;
+#    $self->_find_param_in_map(
+#        'NAME_MAP',
+#        @_,
+#    );
+#}
 
 sub resolve
 {
