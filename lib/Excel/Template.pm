@@ -341,7 +341,11 @@ but I expect to be adding on to it very soon.
 =head1 AUTHOR
 
     Rob Kinyon
-    rkinyon@columbus.rr.com
+    rob.kinyon@gmail.com
+
+=head1 CONTRIBUTORS
+
+There is a mailing list at http://groups-beta.google.com/group/ExcelTemplate
 
 =head1 COPYRIGHT
 

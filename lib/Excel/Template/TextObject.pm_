@@ -8,7 +8,7 @@ BEGIN {
 
     use Excel::Template::Base;
 
-#    use Unicode::String;
+UNI_YES     use Unicode::String;
 }
 
 # This is a helper object. It is not instantiated by the user,
@@ -31,8 +31,8 @@ sub resolve
     my $self = shift;
     my ($context) = @_;
 
-#    my $t = Unicode::String::utf8('');
-    my $t = '';
+UNI_YES    my $t = Unicode::String::utf8('');
+UNI_NO    my $t = '';
 
     for my $tok (@{$self->{STACK}})
     {
@@ -40,8 +40,8 @@ sub resolve
         $val = $val->resolve($context)
             if Excel::Template::Factory::isa($val, 'VAR');
 
-#        $t .= Unicode::String::utf8("$val");
-        $t .= $val;
+UNI_YES        $t .= Unicode::String::utf8("$val");
+UNI_NO        $t .= $val;
     }
 
     return $t;

@@ -37,8 +37,8 @@ sub get_text
     }
     else
     {
-#        $txt = Unicode::String::utf8('');
-        $txt = '';
+UNI_YES        $txt = Unicode::String::utf8('');
+UNI_NO         $txt = '';
     }
                                                                                 
     return $txt;
