@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.23';
+    $VERSION  = '0.24';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -86,7 +86,7 @@ sub param
     my $self = shift;
 
     # Allow an arbitrary number of hashrefs, so long as they're the first things    # into param(). Put each one onto the end, de-referenced.
-    push @_, %{shift @_} while UNIVERSAL::isa($_[0], 'HASH');
+    push @_, %{shift @_} while ref $_[0] eq 'HASH';
 
     (@_ % 2)
         && die __PACKAGE__, "->param() : Odd number of parameters to param()\n";
@@ -106,9 +106,13 @@ sub write_file
     my $xls = $self->{RENDERER}->new($filename)
         || die "Cannot create XLS in '$filename': $!\n";
 
-    $self->_prepare_output($xls);
+    eval {
+        $self->_prepare_output($xls);
+    };
 
     $xls->close;
+
+    return if $@;
 
     return ~~1;
 }
@@ -120,7 +124,8 @@ sub output
     my $output;
     tie *XLS, 'IO::Scalar', \$output;
 
-    $self->write_file(\*XLS);
+    $self->write_file(\*XLS)
+        or return;
 
     return $output;
 }
@@ -143,7 +148,7 @@ sub parse_xml
 
                 if ( $node->isa( 'WORKBOOK' ) )
                 {
-                    push @{$self->{WORKBOOKS}}, $node;
+                    $self->{WORKBOOK} = $node;
                 }
                 elsif ( $node->is_embedded )
                 {
@@ -204,18 +209,18 @@ sub parse_xml
     my $parser = XML::Parser->new( @parms );
     $parser->parse(do { local $/ = undef; <INFILE> });
 
-    unless ( ref $file )
-    {
-        close INFILE;
-    }
+    close INFILE
+        unless ref $file;
 
     return ~~1;
 }
-*parse = \&parse_xml;
+*parse = *parse = \&parse_xml;
 
 sub _prepare_output
 {
     my $self = shift;
+    return unless $self->{WORKBOOK};
+
     my ($xls) = @_;
 
     my $context = Excel::Template::Factory->_create(
@@ -226,7 +231,7 @@ sub _prepare_output
         UNICODE   => $self->{UNICODE},
     );
 
-    $_->render($context) for @{$self->{WORKBOOKS}};
+    $self->{WORKBOOK}->render($context);
 
     return ~~1;
 }

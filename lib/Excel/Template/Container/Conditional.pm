@@ -26,8 +26,8 @@ sub _conditional_passes
     return 0 unless $name =~ /\S/;
 
     my $val = $context->param($name);
-    $val = @{$val} while UNIVERSAL::isa($val, 'ARRAY');
-    $val = ${$val} while UNIVERSAL::isa($val, 'SCALAR');
+    $val = @{$val} while ref $val eq 'ARRAY';
+    $val = ${$val} while ref $val eq 'SCALAR';
 
     my $value = $context->get($self, 'VALUE');
     if (defined $value)

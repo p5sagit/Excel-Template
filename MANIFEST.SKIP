@@ -20,3 +20,8 @@
 
 # Devel::Cover
 ^cover_db/?
+^tags?
+.err?
+
+# developer-only tests
+^dev_.*\.t$

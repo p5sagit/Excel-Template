@@ -2,11 +2,7 @@ package Excel::Template::Factory;
 
 use strict;
 
-BEGIN {
-    use vars qw(%Manifest %isBuildable);
-}
-
-%Manifest = (
+my %Manifest = (
 
 # These are the instantiable nodes
     'IF'        => 'Excel::Template::Container::Conditional',
@@ -46,41 +42,35 @@ BEGIN {
     'BASE'       => 'Excel::Template::Base',
 );
 
-%isBuildable = map { $_ => ~~1 } qw(
-    BOLD
-    CELL
-    FORMAT
-    FORMULA
-    IF
-    HIDDEN
-    ITALIC
-    LOCKED
-    OUTLINE
-    LOOP
-    BACKREF
-    RANGE
-    ROW
-    SCOPE
-    SHADOW
-    STRIKEOUT
-    VAR
-    WORKBOOK
-    WORKSHEET
+my %isBuildable = map { $_ => ~~1 } qw(
+    WORKBOOK WORKSHEET
+    FORMAT BOLD HIDDEN ITALIC LOCKED OUTLINE SHADOW STRIKEOUT
+    IF ROW LOOP SCOPE
+    CELL FORMULA
+    VAR BACKREF RANGE
 );
 
-sub _load_class
 {
-    my $self = shift;
-    my ($class) = @_;
+    my %Loaded;
+    sub _load_class
+    {
+        my $self = shift;
+        my ($class) = @_;
 
-    (my $filename = $class) =~ s!::!/!g;
-    eval {
-        require "$filename.pm";
-    }; if ($@) {
-        die "Cannot find or compile PM file for '$class' ($filename)\n";
+        unless ( exists $Loaded{$class} )
+        {
+            (my $filename = $class) =~ s!::!/!g;
+            eval {
+                require "$filename.pm";
+            }; if ($@) {
+                die "Cannot find or compile PM file for '$class' ($filename)\n";
+            }
+
+            $Loaded{$class} = ~~1;
+        }
+
+        return ~~1;
     }
-
-    return ~~1;
 }
 
 {

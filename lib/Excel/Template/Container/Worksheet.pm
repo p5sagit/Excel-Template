@@ -22,6 +22,12 @@ sub render
         $context->active_worksheet->protect( $password );
     }
 
+    my $keep_zeros = $context->get( $self, 'KEEP_LEADING_ZEROS' );
+    if ( defined $keep_zeros )
+    {
+        $context->active_worksheet->keep_leading_zeros( $keep_zeros ? 1 : 0 );
+    }
+
     return $self->SUPER::render($context);
 }
 
@@ -58,6 +64,10 @@ If the attribute exists, it will mark the worksheet as being protected. Whatever
 value is set will be used as the password.
 
 This activates the HIDDEN and LOCKED nodes.
+
+=item * KEEP_LEADING_ZEROS
+
+This will change the behavior of the worksheet to preserve leading zeros.
 
 =back
 

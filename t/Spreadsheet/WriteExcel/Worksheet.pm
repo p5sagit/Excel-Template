@@ -88,5 +88,14 @@ sub set_column {
     }
 }
 
+sub keep_leading_zeros {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::keep_leading_zeros( '@_' )";
+    }
+}
+
 1;
 __END__

@@ -32,7 +32,7 @@ sub new
     # Removed NAME_MAP until I figure out what the heck it's for
     for (qw( STACK PARAM_MAP ))
     {
-        next if defined $self->{$_} && UNIVERSAL::isa($self->{$_}, 'ARRAY');
+        next if defined $self->{$_} && ref $self->{$_} eq 'ARRAY';
         $self->{$_} = [];
     }
 

@@ -19,28 +19,29 @@ sub new
 
     $self->{ELEMENTS} = []
         unless exists $self->{ELEMENTS} &&
-            UNIVERSAL::isa($self->{ELEMENTS}, 'ARRAY');
+            ref $self->{ELEMENTS} eq 'ARRAY';
 
     return $self;
 }
 
-sub _do_page
-{
-    my $self = shift;
-    my ($method, $context) = @_;
-
-    for my $e (@{$self->{ELEMENTS}})
-    {
-        $e->enter_scope($context);
-        $e->$method($context);
-        $e->exit_scope($context, 1);
-    }
-
-    return 1;
-}
-
-sub begin_page { _do_page 'begin_page', @_ }
-sub end_page   { _do_page 'end_page', @_   }
+# Removed as unused code
+#sub _do_page
+#{
+#    my $self = shift;
+#    my ($method, $context) = @_;
+#
+#    for my $e (@{$self->{ELEMENTS}})
+#    {
+#        $e->enter_scope($context);
+#        $e->$method($context);
+#        $e->exit_scope($context, 1);
+#    }
+#
+#    return 1;
+#}
+#
+#sub begin_page { _do_page 'begin_page', @_ }
+#sub end_page   { _do_page 'end_page', @_   }
 
 sub iterate_over_children
 {
@@ -71,6 +72,7 @@ sub render { $_[0]->iterate_over_children($_[1]) }
 #    return $self->iterate_over_children($context);
 #}
 
+# Removed as unused code
 #sub max_of
 #{
 #    my $self = shift;

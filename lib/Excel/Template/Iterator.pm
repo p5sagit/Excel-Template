@@ -40,7 +40,7 @@ sub new
     # Cache the reference to the appropriate data.
     $self->{DATA} = $self->{CONTEXT}->param($self->{NAME});
 
-    unless (UNIVERSAL::isa($self->{DATA}, 'ARRAY'))
+    unless (ref $self->{DATA} eq 'ARRAY')
     {
         $self->{NO_PARAMS} = 1;
         warn "'$self->{NAME}' does not have a list of parameters", $/ if $^W;

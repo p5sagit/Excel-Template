@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+0.24 ??? Mar 0? ??:00:00 2005
+    - Improved code coverage with more and better tests
+
 0.23 Fri Feb 25 15:00:00 2005
     - Improved code coverage with more and better tests
     - Fixed POD bug with Devel::Cover results

@@ -21,7 +21,7 @@ sub new
 
     $self->{STACK} = []
         unless defined $self->{STACK} &&
-            UNIVERSAL::isa($self->{STACK}, 'ARRAY');
+            ref $self->{STACK} eq 'ARRAY';
 
     return $self;
 }

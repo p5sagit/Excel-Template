@@ -1,0 +1,112 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.5.4	//
+PROPERTY	lib/Excel/Template/Format.pm	/^        PROPERTY:$/;"	l
+RENDER_BIG	lib/Excel/Template.pm	/^use constant RENDER_BIG => 'big';$/;"	c
+RENDER_NML	lib/Excel/Template.pm	/^use constant RENDER_NML => 'normal';$/;"	c
+RENDER_XML	lib/Excel/Template.pm	/^use constant RENDER_XML => 'xml';$/;"	c
+UNIVERSAL	lib/Excel/Template/Container.pm	/^            UNIVERSAL::isa($self->{ELEMENTS}, 'ARRAY');$/;"	l
+UNIVERSAL	lib/Excel/Template/TextObject.pm	/^            UNIVERSAL::isa($self->{STACK}, 'ARRAY');$/;"	l
+_assign	lib/Excel/Template/Format.pm	/^    sub _assign { $_Formats{$_[0]} = $_[1]; $_Formats{$_[1]} = $_[0] }$/;"	s
+_conditional_passes	lib/Excel/Template/Container/Conditional.pm	/^sub _conditional_passes$/;"	s
+_create	lib/Excel/Template/Factory.pm	/^sub _create$/;"	s
+_create_node	lib/Excel/Template/Factory.pm	/^sub _create_node$/;"	s
+_do_globals	lib/Excel/Template/Iterator.pm	/^sub _do_globals$/;"	s
+_do_page	lib/Excel/Template/Container.pm	/^sub _do_page$/;"	s
+_find_param_in_map	lib/Excel/Template/Context.pm	/^sub _find_param_in_map$/;"	s
+_get_text	lib/Excel/Template/Element/Cell.pm	/^sub _get_text$/;"	s
+_key_to_params	lib/Excel/Template/Format.pm	/^    sub _key_to_params$/;"	s
+_load_class	lib/Excel/Template/Factory.pm	/^sub _load_class$/;"	s
+_make_iterator	lib/Excel/Template/Container/Loop.pm	/^sub _make_iterator$/;"	s
+_params_to_key	lib/Excel/Template/Format.pm	/^    sub _params_to_key$/;"	s
+_prepare_output	lib/Excel/Template.pm	/^sub _prepare_output$/;"	s
+_retrieve_key	lib/Excel/Template/Format.pm	/^    sub _retrieve_key { $_Formats{ $_[0] } }$/;"	s
+active_format	lib/Excel/Template/Context.pm	/^sub active_format$/;"	s
+active_worksheet	lib/Excel/Template/Context.pm	/^sub active_worksheet$/;"	s
+add_format	t/Spreadsheet/WriteExcel.pm	/^sub add_format {$/;"	s
+add_reference	lib/Excel/Template/Context.pm	/^sub add_reference$/;"	s
+add_worksheet	t/Spreadsheet/WriteExcel.pm	/^sub add_worksheet {$/;"	s
+begin_page	lib/Excel/Template/Container.pm	/^sub begin_page { _do_page 'begin_page', @_ }$/;"	s
+blank_format	lib/Excel/Template/Format.pm	/^sub blank_format$/;"	s
+can_continue	lib/Excel/Template/Iterator.pm	/^sub can_continue$/;"	s
+close	t/Spreadsheet/WriteExcel.pm	/^sub close {$/;"	s
+copy	lib/Excel/Template/Format.pm	/^    sub copy$/;"	s
+deltas	lib/Excel/Template/Base.pm	/^sub deltas$/;"	s
+deltas	lib/Excel/Template/Container/Row.pm	/^sub deltas$/;"	s
+deltas	lib/Excel/Template/Element/Cell.pm	/^sub deltas$/;"	s
+end_page	lib/Excel/Template/Container.pm	/^sub end_page   { _do_page 'end_page', @_   }$/;"	s
+enter_scope	lib/Excel/Template/Base.pm	/^sub enter_scope { ($_[1])->enter_scope($_[0]) }$/;"	s
+enter_scope	lib/Excel/Template/Context.pm	/^sub enter_scope$/;"	s
+enter_scope	lib/Excel/Template/Iterator.pm	/^sub enter_scope$/;"	s
+exit_scope	lib/Excel/Template/Base.pm	/^sub exit_scope { ($_[1])->exit_scope(@_[0, 2]) }$/;"	s
+exit_scope	lib/Excel/Template/Context.pm	/^sub exit_scope$/;"	s
+exit_scope	lib/Excel/Template/Iterator.pm	/^sub exit_scope$/;"	s
+get	lib/Excel/Template/Context.pm	/^sub get$/;"	s
+get_all_references	lib/Excel/Template/Context.pm	/^sub get_all_references$/;"	s
+get_calls	t/mock.pm	/^sub get_calls { @calls }$/;"	s
+get_last_reference	lib/Excel/Template/Context.pm	/^sub get_last_reference$/;"	s
+is_embedded	lib/Excel/Template/Base.pm	/^sub is_embedded { Excel::Template::Factory::is_embedded(@_) }$/;"	s
+is_embedded	lib/Excel/Template/Factory.pm	/^sub is_embedded$/;"	s
+isa	lib/Excel/Template/Base.pm	/^sub isa { Excel::Template::Factory::isa(@_) }$/;"	s
+isa	lib/Excel/Template/Factory.pm	/^sub isa$/;"	s
+iterate_over_children	lib/Excel/Template/Container.pm	/^sub iterate_over_children$/;"	s
+max	lib/Excel/Template/Element/Range.pm	/^sub max { $_[0] > $_[1] ? $_[0] : $_[1] }$/;"	s
+min	lib/Excel/Template/Element/Range.pm	/^sub min { $_[0] < $_[1] ? $_[0] : $_[1] }$/;"	s
+more_params	lib/Excel/Template/Iterator.pm	/^sub more_params$/;"	s
+new	lib/Excel/Template.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Base.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Bold.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Hidden.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Italic.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Locked.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Loop.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Outline.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Shadow.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Container/Strikeout.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Context.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Element/Cell.pm	/^sub new$/;"	s
+new	lib/Excel/Template/Iterator.pm	/^sub new$/;"	s
+new	lib/Excel/Template/TextObject.pm	/^sub new$/;"	s
+new	t/Spreadsheet/WriteExcel.pm	/^sub new {$/;"	s
+new	t/Spreadsheet/WriteExcel/Big.pm	/^sub new {$/;"	s
+new	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub new {$/;"	s
+new	t/Spreadsheet/WriteExcelXML.pm	/^sub new {$/;"	s
+new_worksheet	lib/Excel/Template/Context.pm	/^sub new_worksheet$/;"	s
+next	lib/Excel/Template/Iterator.pm	/^sub next$/;"	s
+output	lib/Excel/Template.pm	/^sub output$/;"	s
+param	lib/Excel/Template.pm	/^sub param$/;"	s
+param	lib/Excel/Template/Context.pm	/^sub param$/;"	s
+parse_xml	lib/Excel/Template.pm	/^sub parse_xml$/;"	s
+register	lib/Excel/Template.pm	/^sub register { shift; Excel::Template::Factory->register(@_) }$/;"	s
+register	lib/Excel/Template/Factory.pm	/^    sub register$/;"	s
+render	lib/Excel/Template/Base.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Container.pm	/^sub render { $_[0]->iterate_over_children($_[1]) }$/;"	s
+render	lib/Excel/Template/Container/Conditional.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Container/Format.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Container/Loop.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Container/Row.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Container/Worksheet.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Element/Cell.pm	/^sub render$/;"	s
+render	lib/Excel/Template/Element/Formula.pm	/^sub render { $_[0]->SUPER::render( $_[1], 'write_formula' ) }$/;"	s
+render	t/Register_018.pm	/^sub render$/;"	s
+reset	t/mock.pm	/^sub reset { @calls = (); }$/;"	s
+resolve	lib/Excel/Template/Base.pm	/^sub resolve$/;"	s
+resolve	lib/Excel/Template/Context.pm	/^sub resolve$/;"	s
+resolve	lib/Excel/Template/Element/Backref.pm	/^sub resolve$/;"	s
+resolve	lib/Excel/Template/Element/Range.pm	/^sub resolve$/;"	s
+resolve	lib/Excel/Template/Element/Var.pm	/^sub resolve { ($_[1])->param($_[1]->resolve($_[0], 'NAME')) }$/;"	s
+resolve	lib/Excel/Template/TextObject.pm	/^sub resolve$/;"	s
+set_column	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub set_column {$/;"	s
+set_row	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub set_row {$/;"	s
+use_unicode	lib/Excel/Template/Context.pm	/^sub use_unicode { $_[0]->{UNICODE} && 1 }$/;"	s
+write	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write {$/;"	s
+write_blank	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write_blank {$/;"	s
+write_file	lib/Excel/Template.pm	/^sub write_file$/;"	s
+write_formula	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write_formula {$/;"	s
+write_number	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write_number {$/;"	s
+write_string	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write_string {$/;"	s
+write_url	t/Spreadsheet/WriteExcel/Worksheet.pm	/^sub write_url {$/;"	s

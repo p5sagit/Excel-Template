@@ -66,8 +66,9 @@ t/016.xml
 t/017_filehandle.t
 t/018_register.t
 t/019_output.t
-t/pod.t
-t/pod_coverage.t
+t/020_worksheet_attributes.t
+t/998_pod.t
+t/999_pod_coverage.t
 t/mock.pm
 t/Register_018.pm
 t/Spreadsheet/WriteExcel.pm

@@ -13,11 +13,12 @@ use ExtUtils::MakeMaker;
 }
 
 my $prereqs = {
-    'Spreadsheet::WriteExcel' => 0.42,
     'Test::More'              => 0.01,
     'XML::Parser'             => 0.01,
     'IO::Scalar'              => 0.01,
     'File::Basename'          => 0.01,
+    'Spreadsheet::WriteExcel' => 0.42,
+    'Spreadsheet::WriteExcel::Utility' => 0.01,
 };
 
 # The assumption is Perl 5.8.0 and greater doesn't need Unicode::String.
