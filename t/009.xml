@@ -1,0 +1,24 @@
+<workbook>
+  <worksheet name="loops">
+    <loop name="loopy">
+      <row>
+        <cell text="$value" />
+        <cell text="text" />
+      </row>
+    </loop>
+
+    <loop name="outer">
+      <row>
+        <cell text="$iter" />
+        <loop name="inner">
+          <cell text="$value" />
+        </loop>
+      </row>
+    </loop>
+
+  </worksheet>
+
+  <loop name="worksheets">
+    <worksheet name="$value" />
+  </loop>
+</workbook>

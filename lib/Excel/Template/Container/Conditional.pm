@@ -37,10 +37,6 @@ sub conditional_passes
             ? $isOp{$op}
             : '==';
 
-        # Force numerical context on both values;
-        $value *= 1;
-        $val *= 1;
-
         my $res;
         for ($op)
         {
@@ -60,22 +56,22 @@ sub conditional_passes
             die "Unknown operator in conditional resolve", $/;
         }
 
-        return 0 unless $res;
+        return $res && 1;
     }
-    elsif (my $is = uc $context->get($self, 'IS'))
-    {
-        my $istrue = $val && 1;
-        if ($is eq 'TRUE')
-        {
-            return 0 unless $istrue;
-        }
-        else
-        {
-            warn "Conditional 'is' value was [$is], defaulting to 'FALSE'" . $/
-                if $is ne 'FALSE';
 
-            return 0 if $istrue;
-        }
+    my $istrue = $val && 1;
+
+    my $is = uc $context->get($self, 'IS') || 'TRUE';
+    if ($is eq 'TRUE')
+    {
+        return 0 unless $istrue;
+    }
+    else
+    {
+        warn "Conditional 'is' value was [$is], defaulting to 'FALSE'" . $/
+            if $is ne 'FALSE';
+
+        return 0 if $istrue;
     }
 
     return 1;

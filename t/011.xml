@@ -1,0 +1,20 @@
+<workbook>
+  <worksheet name="conditional">
+    <loop name="loopy">
+      <row>
+        <if name="int">
+          <cell text="bool" />
+        </if>
+        <if name="int" is="FALSE">
+          <cell text="not bool" />
+        </if>
+        <if name="int" op="==" value="0">
+          <cell text="int" />
+        </if>
+        <if name="char" op="eq" value="y">
+          <cell text="char" />
+        </if>
+      </row>
+    </loop>
+  </worksheet>
+</workbook>

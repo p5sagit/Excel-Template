@@ -52,7 +52,8 @@ None
 
 =head1 DEPENDENCIES
 
-None
+You must have protected the worksheet containing any cells that are affected by
+this format. Otherwise, this node will have no effect.
 
 =head1 USAGE
 
@@ -70,6 +71,6 @@ Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
-FORMAT
+WORKSHEET, FORMAT
 
 =cut

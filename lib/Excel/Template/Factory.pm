@@ -52,12 +52,15 @@ BEGIN {
     FORMAT
     FORMULA
     IF
+    HIDDEN
     ITALIC
+    LOCKED
     OUTLINE
     LOOP
     BACKREF
     RANGE
     ROW
+    SCOPE
     SHADOW
     STRIKEOUT
     VAR

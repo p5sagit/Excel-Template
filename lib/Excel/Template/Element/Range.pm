@@ -50,12 +50,12 @@ Excel::Template::Element::Range
 
 =head1 PURPOSE
 
-Returns a range of cell locations (i.e. B2:C2) that contains all calls using this
-reference. To return the location of the last cell, use REF.
+Returns a range of cell locations (i.e. B2:C2) that contains all calls using
+this reference. To return the location of the last cell, use BACKREF.
 
 =head1 NODE NAME
 
-REF
+RANGE
 
 =head1 INHERITANCE
 
@@ -102,6 +102,6 @@ Rob Kinyon (rkinyon@columbus.rr.com)
 
 =head1 SEE ALSO
 
-CELL, REF
+CELL, BACKREF
 
 =cut

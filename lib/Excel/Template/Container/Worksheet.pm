@@ -16,6 +16,12 @@ sub render
 
     $context->new_worksheet( $self );
 
+    my $password = $context->get( $self, 'PROTECT' );
+    if (defined $password)
+    {
+        $context->active_worksheet->protect( $password );
+    }
+
     return $self->SUPER::render($context);
 }
 
@@ -45,6 +51,13 @@ Excel::Template::Container
 =item * NAME
 
 This is the name of the worksheet to be added.
+
+=item * PROTECT
+
+If the attribute exists, it will mark the worksheet as being protected. Whatever
+value is set will be used as the password.
+
+This activates the HIDDEN and LOCKED nodes.
 
 =back 4
 

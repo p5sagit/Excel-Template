@@ -1,0 +1,5 @@
+<workbook>
+  <worksheet />
+  <worksheet name="foo"/>
+  <worksheet name="foo"/>
+</workbook>
