@@ -28,6 +28,11 @@ sub new
         unshift @renderer_classes, 'Spreadsheet::WriteExcel::Big';
     }
 
+    if (exists $self->{XML} && $self->{XML})
+    {
+        unshift @renderer_classes, 'Spreadsheet::WriteExcelXML';
+    }
+
     $self->{RENDERER} = undef;
     foreach my $class (@renderer_classes)
     {
@@ -220,7 +225,7 @@ For example, test.xml:
 Now, create a small program to use it:
 
   #!/usr/bin/perl -w
-  use Excel::Template
+  use Excel::Template;
 
   # Create the Excel template
   my $template = Excel::Template->new(
@@ -272,7 +277,7 @@ described below.)
 
 new() accepts an optional BIG_FILE parameter. This will attempt to change the
 renderer from L<Spreadsheet::WriteExcel> to L<Spreadsheet::WriteExcel::Big>. You
-must already have L<Spreadsheet::WriteExcel::Big> installed on your system.
+must already have L<OLE::Storage_Lite> (required by Spreadsheet::WriteExcel::Big) installed on your system.
 
 new() also accepts an optional USE_UNICODE parameter. This will use
 L<Unicode::String> to represent strings instead of Perl's internal string
@@ -281,8 +286,9 @@ handling. You must already have L<Unicode::String> installed on your system.
 The USE_UNICODE parameter will be ignored if you are using Perl 5.8 or higher as
 Perl's internal string handling is unicode-aware.
 
-NOTE: L<Spreadsheet::WriteExcel::Big> and mod_perl clash for some reason. This
-is outside of my control.
+NOTE: Certain older versions of L<OLE::Storage_Lite> and mod_perl clash for some
+reason. Upgrading to the latest version of L<OLE::Storage_Lite> should fix the
+problem.
 
 =head2 param()
 

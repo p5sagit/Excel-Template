@@ -11,37 +11,37 @@ sub new {
 
     {
         local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::new( '@_' )";
+        push @mock::calls, ref($self) . "::new( '@_' )";
     }
 
     return $self;
 }
 
 sub close {
-    shift;
+    my $self = shift;
     {
         local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::close( '@_' )";
+        push @mock::calls, ref($self) . "::close( '@_' )";
     }
 }
 
 sub add_worksheet {
-    shift;
+    my $self = shift;
     {
         local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::add_worksheet( '@_' )";
+        push @mock::calls, ref($self) . "::add_worksheet( '@_' )";
     }
     return Spreadsheet::WriteExcel::Worksheet->new;
 }
 
 my $format_num = 1;
 sub add_format {
-    shift;
+    my $self = shift;
     my %x = @_;
     my @x = map { $_ => $x{$_} } sort keys %x;
     {
         local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::add_format( '@x' )";
+        push @mock::calls, ref($self) . "::add_format( '@x' )";
     }
     return $format_num++;
 }

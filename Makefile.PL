@@ -1,8 +1,16 @@
-use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-
 use strict;
+
+use ExtUtils::MakeMaker;
+{
+    no strict 'refs';
+
+    my $libscan = \&{"ExtUtils::MM_Any::libscan"};
+    *{"ExtUtils::MM_Any::libscan"} = sub {
+        return '' unless $libscan->(@_);
+        return '' if $_[1] =~ /\.swp$/;
+        return $_[1];
+    };
+}
 
 my $prereqs = {
     'Spreadsheet::WriteExcel' => 0.42,
@@ -27,7 +35,9 @@ if ($] < 5.008)
 WriteMakefile(
     NAME         => 'Excel::Template',
     VERSION_FROM => 'lib/Excel/Template.pm', # finds $VERSION
-    AUTHOR       => 'Rob Kinyon (rob.kinyon@gmail.com)',
     ABSTRACT     => 'Excel::Template',
     PREREQ_PM    => $prereqs,
+    ($] >= 5.005 ?
+       (ABSTRACT_FROM => 'lib/Excel/Template.pm',
+        AUTHOR       => 'Rob Kinyon (rob.kinyon@gmail.com)') : ()),
 );

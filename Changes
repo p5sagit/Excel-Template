@@ -1,6 +1,13 @@
 Revision history for Perl distribution Excel::Template
 
-0.20 Wed Jan 26 12:00:00 2004
+0.21 Wed Feb 24 14:00:00 2005
+    - Fixed documentation bug in BACKREF (Thanks to Paul Williams)
+    - Added code to Makefile.PL to skip .swp files in the Makefile
+    - Added RENDERER option to new()
+      - Deprecated BIG_FILE
+    - Added pod.t and pod_coverage.t
+
+0.20 Wed Jan 26 12:00:00 2005
     - Removed PM_FILTER by adding an optional USE_UNICODE runtime parameter.
     - Added a "type" attribute to CELL to allow printing by the write_*() family
 

@@ -73,7 +73,7 @@ In the example...
     <cell ref="this_cell"/><cell ref="that_cell"><cell ref="that_cell">
   </row>
   <row>
-    <formula>=<ref ref="this_cell">+<ref ref="that_cell"></formula>
+    <formula>=<backref ref="this_cell">+<backref ref="that_cell"></formula>
   </row>
 
 The formula in row 2 would be =A1+C1.  C1 is the last to reference "that_cell".
