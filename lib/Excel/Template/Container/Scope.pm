@@ -59,7 +59,7 @@ all has the same set of parameter values, but don't have a common parent.
 
 =head1 AUTHOR
 
-Rob Kinyon (rkinyon@columbus.rr.com)
+Rob Kinyon (rob.kinyon@gmail.com)
 
 =head1 SEE ALSO
 
