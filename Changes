@@ -1,5 +1,13 @@
 Revision history for Perl module Excel::Template
 
+0.14 Wed Nov 04 13:30:00 2004
+        - Added new format support for (nearly) all formats supported by
+          Spreadsheet::WriteExcel
+        - Fixed email address everywhere
+
+0.13 Thu Oct 29 07:30:00 2004
+        - Fixed email address and added GoogleGroup
+
 0.12 Thu Apr 08 07:30:00 2004
         - Fixed bug regarding empty arrays as loop variables
 
