@@ -17,7 +17,7 @@ sub render
     my ($context) = @_;
 
     my $old_format = $context->active_format;
-    my $format = Excel::Template::Format->copy(
+    my $format = $context->format_object->copy(
         $context, $old_format,
 
         %{$self},

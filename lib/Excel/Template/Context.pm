@@ -12,7 +12,7 @@ BEGIN {
 use Excel::Template::Format;
 
 # This is a helper object. It is not instantiated by the user, nor does it
-# represent an XML object. Rather, every container will use this object to
+# represent an XML node. Rather, every container will use this object to
 # maintain the context for its children.
 
 my %isAbsolute = map { $_ => ~~1 } qw(
@@ -26,7 +26,8 @@ sub new
     my $self = $class->SUPER::new(@_);
 
     $self->{ACTIVE_WORKSHEET} = undef;
-    $self->{ACTIVE_FORMAT}    = Excel::Template::Format->blank_format($self);
+    $self->{FORMAT_OBJECT}    = Excel::Template::Format->new;
+    $self->{ACTIVE_FORMAT}    = $self->{FORMAT_OBJECT}->blank_format($self);
     $self->{WORKSHEET_NAMES}  = undef;
 
     $self->{__MARKS} = {};
@@ -122,7 +123,7 @@ sub resolve
     return $prev_val unless defined $obj_val;
 
     # Prevent divide-by-zero issues.
-    return $val if $op eq '/' and $val == 0;
+    return $prev_val if $op eq '/' and $val == 0;
 
     my $new_val;
     for ($op)
@@ -300,6 +301,8 @@ sub get_last_reference
     return @{ $self->{REFERENCES}{$ref}[-1] };
 }
 
+sub format_object { $_[0]{FORMAT_OBJECT} }
+
 1;
 __END__
 
@@ -344,6 +347,8 @@ None
 =head2 active_worksheet
 
 =head2 add_reference
+
+=head2 format_object
 
 =head2 get
 

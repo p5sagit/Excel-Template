@@ -109,6 +109,7 @@ sub write_file
     eval {
         $self->_prepare_output($xls);
     };
+print $@ if $@;
 
     $xls->close;
 
@@ -404,7 +405,7 @@ This node represents a loop. It behaves just like L<HTML::Template>'s TMPL_LOOP.
 
 =item * L<ROW|Excel::Template::Container::Row>
 
-This node represents a row of data. This is the A in A1.
+This node represents a row of data. This is the 1 in A1. There is no COLUMN node, as of yet.
 
 =item * L<FORMAT|Excel::Template::Container::Format>
 
@@ -465,39 +466,40 @@ I used L<Devel::Cover> to test the coverage of my tests. Every release, I intend
 
 Excel::Template is also part of the CPAN Kwalitee initiative, being one of the top 100 non-core modules downloaded from CPAN. If you wish to help out, please feel free to contribute tests, patches, and/or suggestions.
 
-  -----------------------------------------------------------------------
-  File                           stmt brnch  cond   sub   pod  time total
-  -----------------------------------------------------------------------
-  blib/lib/Excel/Template.pm     96.0  62.5  58.8 100.0 100.0  25.2  86.2
-  ...ib/Excel/Template/Base.pm   87.0  50.0  66.7  81.8  87.5   8.7  83.0
-  ...cel/Template/Container.pm   71.4  50.0  33.3  70.0  80.0   4.9  68.4
-  ...emplate/Container/Bold.pm  100.0   n/a   n/a 100.0   0.0   0.7  95.0
-  .../Container/Conditional.pm   64.9  57.5  66.7 100.0   0.0   0.7  63.9
-  ...plate/Container/Format.pm  100.0   n/a   n/a 100.0   0.0   0.7  96.6
-  ...plate/Container/Hidden.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...plate/Container/Italic.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...plate/Container/Locked.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...emplate/Container/Loop.pm   90.9  50.0  50.0 100.0  50.0   0.5  80.4
-  ...late/Container/Outline.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...Template/Container/Row.pm  100.0  75.0   n/a 100.0  50.0   0.3  93.8
-  ...mplate/Container/Scope.pm  100.0   n/a   n/a 100.0   n/a   0.1 100.0
-  ...plate/Container/Shadow.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...te/Container/Strikeout.pm  100.0   n/a   n/a 100.0   0.0   0.1  95.0
-  ...ate/Container/Workbook.pm  100.0   n/a   n/a 100.0   n/a   0.9 100.0
-  ...te/Container/Worksheet.pm   94.1  50.0   n/a 100.0   0.0   0.9  88.0
-  ...Excel/Template/Context.pm   84.3  53.4  54.2 100.0  92.3  19.5  76.0
-  ...Excel/Template/Element.pm  100.0   n/a   n/a 100.0   n/a   0.5 100.0
-  ...mplate/Element/Backref.pm  100.0  50.0  33.3 100.0   0.0   0.1  87.1
-  .../Template/Element/Cell.pm   95.8  65.0  80.0 100.0  66.7   3.8  86.9
-  ...mplate/Element/Formula.pm  100.0   n/a   n/a 100.0   0.0   0.3  94.1
-  ...Template/Element/Range.pm  100.0  66.7   n/a 100.0  66.7   0.2  93.3
-  ...l/Template/Element/Var.pm  100.0   n/a   n/a 100.0   0.0   0.1  94.1
-  ...Excel/Template/Factory.pm  100.0  73.1   n/a 100.0 100.0  16.3  92.6
-  .../Excel/Template/Format.pm   98.3  81.2  33.3 100.0 100.0  10.0  93.2
-  ...xcel/Template/Iterator.pm   98.6  80.0  70.6 100.0  83.3   1.9  90.3
-  ...el/Template/TextObject.pm   92.9  62.5  33.3 100.0  50.0   3.1  83.0
-  Total                          92.0  63.5  58.3  97.5  98.5 100.0  86.0
-  -----------------------------------------------------------------------
+  ---------------------------- ------ ------ ------ ------ ------ ------ ------
+  File                           stmt branch   cond    sub    pod   time  total
+  ---------------------------- ------ ------ ------ ------ ------ ------ ------
+  blib/lib/Excel/Template.pm     96.0   64.3   58.8  100.0  100.0   26.3   85.8
+  ...ib/Excel/Template/Base.pm   94.4   50.0    n/a  100.0   75.0    6.6   90.0
+  ...cel/Template/Container.pm  100.0   50.0   33.3  100.0   66.7    4.5   88.1
+  ...emplate/Container/Bold.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
+  .../Container/Conditional.pm   95.9   90.0   66.7  100.0    0.0    1.7   91.0
+  ...plate/Container/Format.pm  100.0    n/a    n/a  100.0    0.0    0.6   96.6
+  ...plate/Container/Hidden.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
+  ...plate/Container/Italic.pm  100.0    n/a    n/a  100.0    0.0    0.2   95.0
+  ...ainer/KeepLeadingZeros.pm  100.0  100.0    n/a  100.0    0.0    0.1   96.3
+  ...plate/Container/Locked.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
+  ...emplate/Container/Loop.pm   96.8   50.0   50.0  100.0   50.0    0.4   84.6
+  ...late/Container/Outline.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
+  ...Template/Container/Row.pm  100.0   75.0    n/a  100.0   50.0    0.3   93.8
+  ...mplate/Container/Scope.pm  100.0    n/a    n/a  100.0    n/a    0.1  100.0
+  ...plate/Container/Shadow.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
+  ...te/Container/Strikeout.pm  100.0    n/a    n/a  100.0    0.0    0.1   95.0
+  ...ate/Container/Workbook.pm  100.0    n/a    n/a  100.0    n/a    1.0  100.0
+  ...te/Container/Worksheet.pm   94.7   75.0    n/a  100.0   50.0    1.0   90.3
+  ...Excel/Template/Context.pm   98.0   80.0   75.0  100.0   93.3   23.4   91.8
+  ...Excel/Template/Element.pm  100.0    n/a    n/a  100.0    n/a    0.3  100.0
+  ...mplate/Element/Backref.pm  100.0   50.0   33.3  100.0    0.0    0.2   87.1
+  .../Template/Element/Cell.pm   97.9   75.0   80.0  100.0   66.7    3.9   91.1
+  ...mplate/Element/Formula.pm  100.0    n/a    n/a  100.0    0.0    0.2   94.1
+  ...Template/Element/Range.pm  100.0   66.7    n/a  100.0   66.7    0.2   93.3
+  ...l/Template/Element/Var.pm  100.0    n/a    n/a  100.0    0.0    0.2   94.1
+  ...Excel/Template/Factory.pm  100.0   75.0    n/a  100.0  100.0   15.5   92.4
+  .../Excel/Template/Format.pm   98.4   75.0   33.3  100.0   66.7    8.1   91.2
+  ...xcel/Template/Iterator.pm   98.6   80.0   70.6  100.0   83.3    1.4   90.3
+  ...el/Template/TextObject.pm   92.9   62.5   33.3  100.0   50.0    3.2   83.0
+  Total                          98.0   75.2   63.4  100.0   98.5  100.0   92.2
+  ---------------------------- ------ ------ ------ ------ ------ ------ ------
 
 =head1 COPYRIGHT
 

@@ -9,27 +9,27 @@ use strict;
 # places in the file. This provides a way of keeping track of already-allocated
 # formats and making new formats based on old ones.
 
-{
-    my %_Formats;
+sub new { bless {}, shift }
 
-    sub _assign { $_Formats{$_[0]} = $_[1]; $_Formats{$_[1]} = $_[0] }
-#        my $key = shift;
-#        my $format = shift;
-#        $_Formats{$key} = $format;
-#        $_Formats{$format} = $key;
-#    }
+sub _assign { $_[0]{$_[1]} = $_[2]; $_[0]{$_[2]} = $_[1] }
+#    my $self = shift;
+#    my ($key, $format) = @_;
+#    $self->{$key} = $format;
+#    $self->{$format} = $key;
+#}
 
-    sub _retrieve_key { $_Formats{ $_[0] } }
-#        my $format = shift;
-#        return $_Formats{$format};
-#    }
+sub _retrieve_key { $_[0]{ $_[1] } }
+#    my $self = shift;
+#    my ($format) = @_;
+#    return $self->{$format};
+#}
 
-    *_retrieve_format = \&_retrieve_key;
-#    sub _retrieve_format {
-#        my $key = shift;
-#        return $_Formats{$key};
-#    }
-}
+*_retrieve_format = \&_retrieve_key;
+#sub _retrieve_format {
+#    my $self = shift;
+#    my ($key) = @_;
+#    return $self->{$key};
+#}
 
 {
     my @_boolean_formats = qw(
@@ -53,7 +53,7 @@ use strict;
         $params{lc $_} = delete $params{$_} for keys %params;
 
         my @parts = (
-            (map { !! $params{$_} } @_boolean_formats),
+            (map { !!$params{$_} } @_boolean_formats),
             (map { $params{$_} ? $params{$_} + 0 : '' } @_integer_formats),
             (map { $params{$_} || '' } @_string_formats),
         );
@@ -86,13 +86,13 @@ use strict;
 
     sub copy
     {
-        shift;
+        my $self = shift;
         my ($context, $old_fmt, %properties) = @_;
 
         # This is a key used for non-format book-keeping.
         delete $properties{ ELEMENTS };
 
-        defined(my $key = _retrieve_key($old_fmt))
+        defined(my $key = _retrieve_key($self, $old_fmt))
             || die "Internal Error: Cannot find key for format '$old_fmt'!\n";
 
         my %params = _key_to_params($key);
@@ -120,27 +120,27 @@ use strict;
 
         my $new_key = _params_to_key(%params);
 
-        my $format = _retrieve_format($new_key);
+        my $format = _retrieve_format($self, $new_key);
         return $format if $format;
 
         $format = $context->{XLS}->add_format(%params);
-        _assign($new_key, $format);
+        _assign($self, $new_key, $format);
         return $format;
     }
 }
 
 sub blank_format
 {
-    shift;
+    my $self = shift;
     my ($context) = @_;
 
     my $blank_key = _params_to_key();
 
-    my $format = _retrieve_format($blank_key);
+    my $format = _retrieve_format($self, $blank_key);
     return $format if $format;
 
     $format = $context->{XLS}->add_format;
-    _assign($blank_key, $format);
+    _assign($self, $blank_key, $format);
     return $format;
 }
 

@@ -7,7 +7,7 @@ sub render
     my ($self, $context) = @_;
 
     my $old_format = $context->active_format;
-    my $format = Excel::Template::Format->copy(
+    my $format = $context->format_object->copy(
         $context, $old_format,
 
         align => 'center', bold => 1,

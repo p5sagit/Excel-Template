@@ -39,6 +39,7 @@ __END_EXPECTED__
     my @calls = mock::get_calls;
     is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcelXML::new( 'filename' )
+Spreadsheet::WriteExcelXML::add_format( '' )
 Spreadsheet::WriteExcelXML::close( '' )
 __END_EXPECTED__
 }
@@ -56,6 +57,7 @@ __END_EXPECTED__
     my @calls = mock::get_calls;
     is( join( $/, @calls, '' ), <<__END_EXPECTED__, 'Calls match up' );
 Spreadsheet::WriteExcel::new( 'filename' )
+Spreadsheet::WriteExcel::add_format( '' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__
 }

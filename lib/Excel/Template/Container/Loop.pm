@@ -55,11 +55,18 @@ sub render
     {
         $iterator->next;
 
-        unless ($self->iterate_over_children($context))
-        {
-            $iterator->back_up;
-            last;
-        }
+        $self->iterate_over_children($context);
+
+        # It doesn't seem that iterate_over_children() can ever fail, because
+        # I'm not sure that render() can return false. In PDF::Template, where
+        # this module got most of its code, render() can certainly return false,
+        # in the case of page-breaks. I left the code in because it didn't seem
+        # like it would hurt.
+        #unless ($self->iterate_over_children($context))
+        #{
+        #    $iterator->back_up;
+        #    last;
+        #}
     }
 
     $iterator->exit_scope;
@@ -69,6 +76,8 @@ sub render
     return 1;
 }
 
+# These methods are used in PDF::Template to calculate pagebreaks. I'm not sure
+# if they will ever be needed in Excel::Template.
 #sub total_of
 #{
 #    my $self = shift;
