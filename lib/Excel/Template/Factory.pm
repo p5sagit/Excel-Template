@@ -12,12 +12,13 @@ my %Manifest = (
     'WORKBOOK'  => 'Excel::Template::Container::Workbook',
     'WORKSHEET' => 'Excel::Template::Container::Worksheet',
 
-    'BACKREF'   => 'Excel::Template::Element::Backref',
-    'CELL'      => 'Excel::Template::Element::Cell',
-    'FORMULA'   => 'Excel::Template::Element::Formula',
-    'IMAGE'     => 'Excel::Template::Element::Image',
-    'RANGE'     => 'Excel::Template::Element::Range',
-    'VAR'       => 'Excel::Template::Element::Var',
+    'BACKREF'     => 'Excel::Template::Element::Backref',
+    'CELL'        => 'Excel::Template::Element::Cell',
+    'FORMULA'     => 'Excel::Template::Element::Formula',
+    'FREEZEPANES' => 'Excel::Template::Element::FreezePanes',
+    'IMAGE'       => 'Excel::Template::Element::Image',
+    'RANGE'       => 'Excel::Template::Element::Range',
+    'VAR'         => 'Excel::Template::Element::Var',
 
     'FORMAT'    => 'Excel::Template::Container::Format',
 
@@ -49,7 +50,7 @@ my %isBuildable = map { $_ => ~~1 } qw(
     WORKBOOK WORKSHEET
     FORMAT BOLD HIDDEN ITALIC LOCKED OUTLINE SHADOW STRIKEOUT
     IF ROW LOOP SCOPE KEEP_LEADING_ZEROS
-    CELL FORMULA IMAGE
+    CELL FORMULA FREEZEPANES IMAGE
     VAR BACKREF RANGE
 );
 
