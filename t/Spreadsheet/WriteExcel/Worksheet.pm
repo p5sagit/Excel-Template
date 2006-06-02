@@ -97,21 +97,12 @@ sub keep_leading_zeros {
     }
 }
 
-sub insert_bitmap {
+sub insert_image {
     my $self = shift;
 
     {
         local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::insert_bitmap( '@_' )";
-    }
-}
-
-sub freeze_panes {
-    my $self = shift;
-
-    {
-        local $" = "', '";
-        push @mock::calls, __PACKAGE__ . "::freeze_panes( '@_' )";
+        push @mock::calls, __PACKAGE__ . "::insert_image( '@_' )";
     }
 }
 

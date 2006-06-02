@@ -24,11 +24,11 @@ Spreadsheet::WriteExcel::add_format( '' )
 Spreadsheet::WriteExcel::add_worksheet( '' )
 Spreadsheet::WriteExcel::Worksheet::new( '' )
 Spreadsheet::WriteExcel::Worksheet::write( '0', '0', 'before', '1' )
-Spreadsheet::WriteExcel::Worksheet::insert_bitmap( '0', '1', '/full/path', '0', '0', '0', '0' )
+Spreadsheet::WriteExcel::Worksheet::insert_image( '0', '1', '/full/path', '0', '0', '0', '0' )
 Spreadsheet::WriteExcel::Worksheet::write( '0', '2', 'after', '1' )
-Spreadsheet::WriteExcel::Worksheet::insert_bitmap( '0', '3', '/full/path', '2', '2', '0', '0' )
-Spreadsheet::WriteExcel::Worksheet::insert_bitmap( '0', '4', '/full/path', '0', '0', '2', '2' )
-Spreadsheet::WriteExcel::Worksheet::insert_bitmap( '0', '5', '/full/path', '0', '1', '1.1', '0' )
+Spreadsheet::WriteExcel::Worksheet::insert_image( '0', '3', '/full/path', '2', '2', '0', '0' )
+Spreadsheet::WriteExcel::Worksheet::insert_image( '0', '4', '/full/path', '0', '0', '2', '2' )
+Spreadsheet::WriteExcel::Worksheet::insert_image( '0', '5', '/full/path', '0', '1', '1.1', '0' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__
 
@@ -43,3 +43,4 @@ __DATA__
     <image path="/full/path" scale="1.1,0" offset="0,1"/>
   </worksheet>
 </workbook>
+
