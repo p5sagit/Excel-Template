@@ -2,6 +2,9 @@ Revision history for Perl distribution Excel::Template
 
 0.26 Thu Jun 01 17:00:00 2005
     - Fixed how widths are whitelisted to allow '.' for fractions
+    - Fixed how certain formats are copied
+    - Added <image>
+    - Added <freezepanes>
 
 0.25 Thu May 26 11:00:00 2005
     - Changed how the template file is opened to use 3-arg open() if available

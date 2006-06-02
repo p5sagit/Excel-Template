@@ -19,7 +19,6 @@ Missing S::WE features:
     activate/select/set_first_sheet
     set_selection
     outline_settings
-    freeze_panes
     thaw_panes
     merge_range
     set_zoom
