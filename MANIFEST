@@ -31,7 +31,6 @@ lib/Excel/Template/Container/Worksheet.pm
 lib/Excel/Template/Element/Backref.pm
 lib/Excel/Template/Element/Cell.pm
 lib/Excel/Template/Element/Formula.pm
-lib/Excel/Template/Element/FreezePanes.pm
 lib/Excel/Template/Element/Image.pm
 lib/Excel/Template/Element/Range.pm
 lib/Excel/Template/Element/Var.pm
