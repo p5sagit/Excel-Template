@@ -97,5 +97,14 @@ sub keep_leading_zeros {
     }
 }
 
+sub insert_image {
+    my $self = shift;
+
+    {
+        local $" = "', '";
+        push @mock::calls, __PACKAGE__ . "::insert_image( '@_' )";
+    }
+}
+
 1;
 __END__

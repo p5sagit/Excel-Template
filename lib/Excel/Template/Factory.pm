@@ -15,6 +15,7 @@ my %Manifest = (
     'BACKREF'   => 'Excel::Template::Element::Backref',
     'CELL'      => 'Excel::Template::Element::Cell',
     'FORMULA'   => 'Excel::Template::Element::Formula',
+    'IMAGE'     => 'Excel::Template::Element::Image',
     'RANGE'     => 'Excel::Template::Element::Range',
     'VAR'       => 'Excel::Template::Element::Var',
 
@@ -48,7 +49,7 @@ my %isBuildable = map { $_ => ~~1 } qw(
     WORKBOOK WORKSHEET
     FORMAT BOLD HIDDEN ITALIC LOCKED OUTLINE SHADOW STRIKEOUT
     IF ROW LOOP SCOPE KEEP_LEADING_ZEROS
-    CELL FORMULA
+    CELL FORMULA IMAGE
     VAR BACKREF RANGE
 );
 
