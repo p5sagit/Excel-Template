@@ -1,26 +1,19 @@
-\bRCS\b
-\bCVS\b
-,v$
-\B\.svn\b
-
-# Makemaker generated files and dirs.
-^MANIFEST\.
+^_build
+^Build$
+^blib
+~$
+\.bak$
+^MANIFEST\.SKIP$
+CVS
+\.svn
+cover_db
+\..*\.sw.?$
 ^Makefile$
 ^pm_to_blib$
-^blib/?
 ^MakeMaker-\d
 ^blibdirs$
-
-# Temp, old and emacs backup files.
-~$
 \.old$
 ^#.*#$
 ^\.#
-.swp$
-
-# Devel::Cover
-^cover_db/?
-^tags?
-
-# developer-only tests
-^t/dev_.*\.t$
+^\.DS_Store
+^__MACOSX

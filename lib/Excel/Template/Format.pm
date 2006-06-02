@@ -53,7 +53,7 @@ sub _retrieve_key { $_[0]{ $_[1] } }
         $params{lc $_} = delete $params{$_} for keys %params;
 
         my @parts = (
-            (map { !!$params{$_} } @_boolean_formats),
+            (map { $params{$_} ? 1 : '' } @_boolean_formats),
             (map { $params{$_} ? $params{$_} + 0 : '' } @_integer_formats),
             (map { $params{$_} || '' } @_string_formats),
         );
@@ -72,11 +72,11 @@ sub _retrieve_key { $_[0]{ $_[1] } }
         my @string_parts  = splice @key_parts, 0, scalar( @_string_formats );
 
         my %params;
-        $params{ $_boolean_formats[$_] } = !!1
+        $params{ $_boolean_formats[$_] } = ~~1
             for grep { $boolean_parts[$_] } 0 .. $#_boolean_formats;
 
         $params{ $_integer_formats[$_] } = $integer_parts[$_]
-            for grep { defined $integer_parts[$_] } 0 .. $#_integer_formats;
+            for grep { defined $integer_parts[$_] && length $integer_parts[$_] } 0 .. $#_integer_formats;
 
         $params{ $_string_formats[$_] } = $string_parts[$_]
             for grep { $string_parts[$_] } 0 .. $#_string_formats;

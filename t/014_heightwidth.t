@@ -25,5 +25,7 @@ Spreadsheet::WriteExcel::Worksheet::new( '' )
 Spreadsheet::WriteExcel::Worksheet::set_row( '0', '30' )
 Spreadsheet::WriteExcel::Worksheet::set_column( '0', '0', '10' )
 Spreadsheet::WriteExcel::Worksheet::write( '0', '0', '1', '1' )
+Spreadsheet::WriteExcel::Worksheet::set_column( '1', '1', '0.5' )
+Spreadsheet::WriteExcel::Worksheet::write( '0', '1', '1', '1' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__

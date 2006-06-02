@@ -84,7 +84,7 @@ sub render
     # Apply the cell width to the current column
     if (my $width = $context->get($self, 'WIDTH'))
     {
-        $width =~ s/\D//g;
+        $width =~ s/[^\d.]//g;
         $width *= 1;
         if ($width > 0)
         {

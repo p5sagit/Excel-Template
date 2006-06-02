@@ -16,7 +16,6 @@ Missing S::WE features:
     write_url_range
     write_date_time
     write_comment
-    insert_bitmap
     activate/select/set_first_sheet
     set_selection
     outline_settings
