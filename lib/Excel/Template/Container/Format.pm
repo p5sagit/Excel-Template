@@ -17,10 +17,14 @@ sub render
     my ($context) = @_;
 
     my $old_format = $context->active_format;
-    my $format = $context->format_object->copy(
-        $context, $old_format,
 
-        %{$self},
+    my %values;
+    while ( my ($k, $v) = each %$self ) {
+        $values{$k} = $context->resolve( $self, $k );
+    }
+
+    my $format = $context->format_object->copy(
+        $context, $old_format, %values,
     );
     $context->active_format($format);
 
