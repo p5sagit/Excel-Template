@@ -27,6 +27,13 @@ sub render
     $worksheet->keep_leading_zeros( 1 )
         if $context->mark( 'keep_leading_zeros' );
 
+    if ( $context->get( $self, 'LANDSCAPE' ) && !$self->{PORTRAIT} ) {
+        $worksheet->set_landscape;
+    }
+    elsif ( $context->get( $self, 'PORTRAIT' ) ) {
+        $worksheet->set_portrait;
+    }
+
     return $self->SUPER::render($context);
 }
 
@@ -67,6 +74,32 @@ This activates the HIDDEN and LOCKED nodes.
 =item * KEEP_LEADING_ZEROS
 
 This will change the behavior of the worksheet to preserve leading zeros.
+
+=item * LANDSCAPE
+
+This will set the worksheet's orientation to landscape.
+
+=item * PORTRAIT
+
+This will set the worksheet's orientation to portrait.
+
+While this is the default, it's useful to override the default at times. For
+example, in the following situation:
+
+  <workbook landscape="1">
+    <worksheet>
+      ...
+    </worksheet
+    <worksheet portrait="1">
+      ...
+    </worksheet
+    <worksheet>
+      ...
+    </worksheet
+  </workbook>
+
+In that example, the first and third worksheets will be landscape (inheriting
+it from the workbook node), but the second worksheet will be portrait.
 
 =back
 

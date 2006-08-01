@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+0.28 Fri Jul 31 22:00:00 2005
+    - Added landscape and portrait orientations for worksheets
+
 0.27 Tue Jul 25 10:00:00 2006
     - Fixed how widths are whitelisted to allow '.' for fractions
 
