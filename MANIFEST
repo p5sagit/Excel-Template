@@ -77,6 +77,7 @@ t/024_image.t
 t/025_freezepanes.t
 t/026_vars_in_format.t
 t/026_vars_in_format.xml
+t/027_landscape.t
 t/998_pod.t
 t/999_pod_coverage.t
 t/mock.pm
