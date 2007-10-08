@@ -23,6 +23,12 @@ sub resolve
     my @refs = $context->get_all_references( $ref_name );
     return '' unless @refs;
 
+    return $self->_join_refs(@refs);
+}
+
+sub _join_refs {
+    my ($self, @refs) = @_;
+    
     my ($top, $left, $bottom, $right) =
         ( $refs[0][0], $refs[0][1] ) x 2;
 
