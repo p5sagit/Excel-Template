@@ -34,7 +34,7 @@ sub _retrieve_key { $_[0]{ $_[1] } }
 {
     my @_boolean_formats = qw(
         bold italic locked hidden font_outline font_shadow font_strikeout
-        text_wrap text_justlast shrink
+        text_wrap text_justlast shrink is_merged
     );
 
     my @_integer_formats = qw(
@@ -45,6 +45,10 @@ sub _retrieve_key { $_[0]{ $_[1] } }
     my @_string_formats = qw(
         font color align valign bg_color fg_color border_color
         bottom_color top_color left_color right_color
+    );
+
+    my @_fake_slots = qw(
+        is_merged
     );
 
     sub _params_to_key
@@ -122,6 +126,8 @@ sub _retrieve_key { $_[0]{ $_[1] } }
 
         my $format = _retrieve_format($self, $new_key);
         return $format if $format;
+
+        delete $params{$_} for @_fake_slots;
 
         $format = $context->{XLS}->add_format(%params);
         _assign($self, $new_key, $format);

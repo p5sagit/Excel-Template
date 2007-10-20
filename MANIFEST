@@ -33,6 +33,7 @@ lib/Excel/Template/Element/Cell.pm
 lib/Excel/Template/Element/Formula.pm
 lib/Excel/Template/Element/FreezePanes.pm
 lib/Excel/Template/Element/Image.pm
+lib/Excel/Template/Element/MergeRange.pm
 lib/Excel/Template/Element/Range.pm
 lib/Excel/Template/Element/Var.pm
 t/001_load.t
@@ -78,6 +79,7 @@ t/025_freezepanes.t
 t/026_vars_in_format.t
 t/026_vars_in_format.xml
 t/027_landscape.t
+t/028_merge_range.t
 t/998_pod.t
 t/999_pod_coverage.t
 t/mock.pm

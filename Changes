@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+0.29 Mon Oct 08 12:00:00 2007
+    - Added merge_range as written by Stevan Little
+
 0.28 Fri Jul 31 22:00:00 2005
     - Added landscape and portrait orientations for worksheets
 
