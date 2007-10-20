@@ -16,6 +16,7 @@ my %Manifest = (
     'CELL'        => 'Excel::Template::Element::Cell',
     'FORMULA'     => 'Excel::Template::Element::Formula',
     'FREEZEPANES' => 'Excel::Template::Element::FreezePanes',
+    'MERGE_RANGE' => 'Excel::Template::Element::MergeRange',
     'IMAGE'       => 'Excel::Template::Element::Image',
     'RANGE'       => 'Excel::Template::Element::Range',
     'VAR'         => 'Excel::Template::Element::Var',
@@ -50,7 +51,7 @@ my %isBuildable = map { $_ => ~~1 } qw(
     WORKBOOK WORKSHEET
     FORMAT BOLD HIDDEN ITALIC LOCKED OUTLINE SHADOW STRIKEOUT
     IF ROW LOOP SCOPE KEEP_LEADING_ZEROS
-    CELL FORMULA FREEZEPANES IMAGE
+    CELL FORMULA FREEZEPANES IMAGE MERGE_RANGE
     VAR BACKREF RANGE
 );
 
@@ -67,7 +68,7 @@ my %isBuildable = map { $_ => ~~1 } qw(
             eval {
                 require "$filename.pm";
             }; if ($@) {
-                die "Cannot find or compile PM file for '$class' ($filename)\n";
+                die "Cannot find or compile PM file for '$class' ($filename) because $@\n";
             }
 
             $Loaded{$class} = ~~1;
