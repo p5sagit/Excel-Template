@@ -27,5 +27,6 @@ Spreadsheet::WriteExcel::Worksheet::write_number( '0', '1', 'Number', '1' )
 Spreadsheet::WriteExcel::Worksheet::write_blank( '0', '2', 'Blank', '1' )
 Spreadsheet::WriteExcel::Worksheet::write_url( '0', '3', 'URL', '1' )
 Spreadsheet::WriteExcel::Worksheet::write_formula( '0', '4', 'Formula', '1' )
+Spreadsheet::WriteExcel::Worksheet::write_date_time( '0', '5', 'DateTime', '1' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__

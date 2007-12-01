@@ -12,9 +12,7 @@ Missing S::WE features:
     set_codepage
   Worksheet
     write_unicode/write_unicode_le
-    write_url
     write_url_range
-    write_date_time
     write_comment
     activate/select/set_first_sheet
     set_selection
