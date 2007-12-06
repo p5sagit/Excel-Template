@@ -38,12 +38,12 @@ sub _retrieve_key { $_[0]{ $_[1] } }
     );
 
     my @_integer_formats = qw(
-        size num_format underline rotation indent pattern border
+        size underline rotation indent pattern border
         bottom top left right
     );
 
     my @_string_formats = qw(
-        font color align valign bg_color fg_color border_color
+        num_format font color align valign bg_color fg_color border_color
         bottom_color top_color left_color right_color
     );
 

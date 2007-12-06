@@ -40,11 +40,12 @@ sub _get_text
 }
 
 my %legal_types = (
-    'blank'   => 'write_blank',
-    'formula' => 'write_formula',
-    'number'  => 'write_number',
-    'string'  => 'write_string',
-    'url'     => 'write_url',
+    'blank'     => 'write_blank',
+    'formula'   => 'write_formula',
+    'number'    => 'write_number',
+    'string'    => 'write_string',
+    'url'       => 'write_url',
+    'date_time' => 'write_date_time',
 );
 
 sub render
@@ -166,9 +167,11 @@ The legal types (taken from L<Spreadsheet::WriteExcel>) are:
 
 =item * url
 
+=item * date_time
+
 =back
 
-q.v. L<Spreadsheet::WriteExcel> for more info.
+other write_* methods as defined defined L<Spreadsheet::WriteExcel> would be integrated by request
 
 =back
 
