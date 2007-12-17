@@ -2,4 +2,5 @@
   <worksheet />
   <worksheet name="foo"/>
   <worksheet name="foo"/>
+  <worksheet hide_gridlines="2" />
 </workbook>

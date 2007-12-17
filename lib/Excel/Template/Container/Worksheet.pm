@@ -9,29 +9,33 @@ BEGIN {
     use Excel::Template::Container;
 }
 
-sub exit_scope  { $_[1]->active_worksheet( undef ) }
+sub exit_scope { $_[1]->active_worksheet(undef) }
 
-sub render
-{
+sub render {
     my $self = shift;
     my ($context) = @_;
 
-    my $worksheet = $context->new_worksheet( $self );
+    my $worksheet = $context->new_worksheet($self);
 
     my $password = $context->get( $self, 'PROTECT' );
-    if (defined $password)
-    {
-        $worksheet->protect( $password );
+    if ( defined $password ) {
+        $worksheet->protect($password);
     }
 
-    $worksheet->keep_leading_zeros( 1 )
-        if $context->mark( 'keep_leading_zeros' );
+    $worksheet->keep_leading_zeros(1)
+      if $context->mark('keep_leading_zeros');
 
     if ( $context->get( $self, 'LANDSCAPE' ) && !$self->{PORTRAIT} ) {
         $worksheet->set_landscape;
-    }
-    elsif ( $context->get( $self, 'PORTRAIT' ) ) {
+    } elsif ( $context->get( $self, 'PORTRAIT' ) ) {
         $worksheet->set_portrait;
+    }
+
+   
+    my $hide_gridlines = $context->get( $self, 'HIDE_GRIDLINES');
+    
+    if ( defined $hide_gridlines ) {
+        $worksheet->hide_gridlines( $hide_gridlines );
     }
 
     return $self->SUPER::render($context);
@@ -74,6 +78,24 @@ This activates the HIDDEN and LOCKED nodes.
 =item * KEEP_LEADING_ZEROS
 
 This will change the behavior of the worksheet to preserve leading zeros.
+
+
+=item * HIDE_GRIDLINE
+
+his method is used to hide the gridlines on the screen and printed page. 
+Gridlines are the lines that divide the cells on a worksheet. Screen and printed gridlines are 
+turned on by default in an Excel worksheet. If you have defined your own cell 
+borders you may wish to hide the default gridlines.
+
+$worksheet->hide_gridlines();
+
+The following values of $option are valid:
+
+    0 : Don't hide gridlines
+    1 : Hide printed gridlines only
+    2 : Hide screen and printed gridlines
+
+If you don't supply an argument or use undef the default option is 1, i.e. only the printed gridlines are hidden.
 
 =item * LANDSCAPE
 

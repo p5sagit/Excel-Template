@@ -26,5 +26,8 @@ Spreadsheet::WriteExcel::add_worksheet( 'foo' )
 Spreadsheet::WriteExcel::Worksheet::new( '' )
 Spreadsheet::WriteExcel::add_worksheet( '' )
 Spreadsheet::WriteExcel::Worksheet::new( '' )
+Spreadsheet::WriteExcel::add_worksheet( '' )
+Spreadsheet::WriteExcel::Worksheet::new( '' )
+Spreadsheet::WriteExcel::Worksheet::hide_gridlines( '2' )
 Spreadsheet::WriteExcel::close( '' )
 __END_EXPECTED__

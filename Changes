@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+0.31 Mo Dec 17 13:41:00 2007
+    - Add hide_gridlines to worksheet
+
 0.30 Sa Dec 01 00:00:00 2007
     - Add write_date_time to write a datetime-value into a cell
 
