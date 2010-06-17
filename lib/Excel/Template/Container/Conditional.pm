@@ -61,7 +61,7 @@ sub _conditional_passes
 
     my $istrue = $val && 1;
 
-    my $is = uc $context->get($self, 'IS') || 'TRUE';
+    my $is = uc($context->get($self, 'IS') || 'TRUE');
     if ($is eq 'TRUE')
     {
         return 0 unless $istrue;
