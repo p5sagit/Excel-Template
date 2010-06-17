@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+X.XX
+    - Swichting to Module::Install
+
 0.31 Mo Dec 17 13:41:00 2007
     - Add hide_gridlines to worksheet
 

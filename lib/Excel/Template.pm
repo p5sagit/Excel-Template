@@ -452,11 +452,19 @@ This is production quality software, used in several production web applications
 
 =head1 AUTHOR
 
-    Rob Kinyon (rob.kinyon@gmail.com)
+    Rob Kinyon <rob.kinyon@gmail.com>
 
 =head1 CONTRIBUTORS
 
 There is a mailing list at http://groups.google.com/group/ExcelTemplate or exceltemplate@googlegroups.com
+
+=head2 Robert Bohne <rbo@cpan.org>
+
+=over 4
+
+=item * Swichting to Module::Install
+
+=back
 
 =head2 Robert Graff
 
@@ -465,6 +473,14 @@ There is a mailing list at http://groups.google.com/group/ExcelTemplate or excel
 =item * Finishing formats
 
 =item * Fixing several bugs in worksheet naming
+
+=back
+
+=head2 Jens Gassmann
+
+=over 4
+
+=item * Add hide_gridlines to worksheet
 
 =back
 
