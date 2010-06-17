@@ -38,6 +38,17 @@ sub render {
         $worksheet->hide_gridlines( $hide_gridlines );
     }
 
+    my $autofilter = $context->get( $self, "AUTOFILTER");
+    if ( defined $autofilter ) {
+        if ($autofilter =~ /^\D/) {
+            $worksheet->autofilter($autofilter);
+        }else{
+            $autofilter =~ s/ //g;
+            my ($row1, $col1, $row2, $col2) = split(',',$autofilter);
+            $worksheet->autofilter($row1, $col1, $row2, $col2);
+        }
+    }
+
     return $self->SUPER::render($context);
 }
 
@@ -122,6 +133,17 @@ example, in the following situation:
 
 In that example, the first and third worksheets will be landscape (inheriting
 it from the workbook node), but the second worksheet will be portrait.
+
+=item * AUTOFILTER
+
+With these attributes, the auto filter set for the Worksheet.
+See L<Spreadsheet::WriteExcel>->autofilter()
+
+Example:
+    <workbook>
+      <worksheet autofilter='A1:D11' />
+      <worksheet autofilter='0, 0, 10, 3' />
+    </workbook>
 
 =back
 

@@ -464,6 +464,8 @@ There is a mailing list at http://groups.google.com/group/ExcelTemplate or excel
 
 =item * Swichting to Module::Install
 
+=item * Add autofilter to worksheet
+
 =back
 
 =head2 Robert Graff
