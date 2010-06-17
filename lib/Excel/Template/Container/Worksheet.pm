@@ -136,10 +136,12 @@ it from the workbook node), but the second worksheet will be portrait.
 
 =item * AUTOFILTER
 
-With these attributes, the auto filter set for the Worksheet.
-See L<Spreadsheet::WriteExcel>->autofilter()
+With these attribute, you can add the autofilter to a worksheet. An autofilter is a
+way of adding drop down lists to the headers of a 2D range of worksheet data. 
+This is turn allow users to filter the data based on simple criteria so that 
+some data is shown and some is hidden.
 
-Example:
+Example to add an autofilter to a worksheet:
     <workbook>
       <worksheet autofilter='A1:D11' />
       <worksheet autofilter='0, 0, 10, 3' />
