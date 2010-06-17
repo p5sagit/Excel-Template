@@ -450,9 +450,11 @@ None, that I know of.
 
 This is production quality software, used in several production web applications.
 
-=head1 AUTHOR
+=head1 MAINTAINERS
 
-    Rob Kinyon <rob.kinyon@gmail.com>
+    Jens Gassmann <jegade@cpan.org>
+    Robert Bohne <rbo@cpan.org>
+    Rob Kinyon <rkinyon@cpan.org>
 
 =head1 CONTRIBUTORS
 
