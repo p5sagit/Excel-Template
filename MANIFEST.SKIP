@@ -1,4 +1,7 @@
 
+# for developers only :)
+^Todo$
+
 # Don't ship the last dist we built :)
 \.tar\.gz$
 

@@ -1,6 +1,6 @@
 Revision history for Perl distribution Excel::Template
 
-X.XX
+0.31_1 Mon Jun 28 16:51:44 CEST 2010
     - Add autofilter to worksheet
     - Swichting to Module::Install
 
