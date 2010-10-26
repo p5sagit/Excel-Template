@@ -13,13 +13,13 @@ BEGIN {
 sub render {
     my $self = shift;
     my ($context) = @_;
-    
+
     my $ref_name = $context->resolve($self, 'REF');
 
     my @refs = $context->get_all_references( $ref_name );
     (@refs)
-        || die "You must specify a ref for MERGE_RANGE";  
-        
+        || die "You must specify a ref for MERGE_RANGE";
+
     my $range = Excel::Template::Element::Range->_join_refs(@refs);
 
     # NOTE:
@@ -28,7 +28,7 @@ sub render {
     # mark any format used in a merged cell
     # as being specifically for a merged cell
     # and therefore not usable elsewhere.
-    
+
     my $old_format = $context->active_format;
 
     my %values;
@@ -39,15 +39,15 @@ sub render {
     my $format = $context->format_object->copy(
         $context, $old_format, %values,
     );
-    $context->active_format($format); 
+    $context->active_format($format);
 
-    $context->active_worksheet->merge_range(  
-        $range, 
-        $context->get($self, 'TEXT'), 
+    $context->active_worksheet->merge_range(
+        $range,
+        $context->get($self, 'TEXT'),
         $format,
     );
-    
-    $context->active_format($old_format);    
+
+    $context->active_format($old_format);
 
     return 1;
 }
