@@ -99,6 +99,11 @@ sub render
         $context->active_format,
     );
 
+    my $comment = $context->get($self, 'COMMENT');
+    if (defined $comment && length $comment){
+         $context->active_worksheet->write_comment($row, $col,$comment);
+    }
+
     return 1;
 }
 

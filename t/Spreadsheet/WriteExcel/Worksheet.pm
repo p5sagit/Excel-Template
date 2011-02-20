@@ -19,7 +19,7 @@ sub new {
 my @funcs = qw(
     write_string write_number write_blank write_url write_formula write_date_time write
     set_row set_column keep_leading_zeros insert_bitmap freeze_panes
-    set_landscape set_portrait merge_range hide_gridlines autofilter
+    set_landscape set_portrait merge_range hide_gridlines autofilter write_comment
 );
 
 foreach my $func ( @funcs ) {
