@@ -6,7 +6,7 @@ BEGIN {
     use Excel::Template::Base;
     use vars qw ($VERSION @ISA);
 
-    $VERSION  = '0.32';
+    $VERSION  = '0.33';
     @ISA      = qw( Excel::Template::Base );
 }
 
@@ -154,13 +154,13 @@ sub parse_xml
                 elsif ( $node->is_embedded )
                 {
                     return unless @stack;
-                                                                                
+
                     if (exists $stack[-1]{TXTOBJ} &&
                         $stack[-1]{TXTOBJ}->isa('TEXTOBJECT'))
                     {
                         push @{$stack[-1]{TXTOBJ}{STACK}}, $node;
                     }
- 
+
                 }
                 else
                 {
@@ -199,7 +199,7 @@ sub parse_xml
     else
     {
         my ($filename, $dirname) = fileparse($file);
- 
+
         push @parms, Base => $dirname;
 
         eval q{
