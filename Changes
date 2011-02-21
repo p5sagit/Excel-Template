@@ -1,5 +1,7 @@
 Revision history for Perl distribution Excel::Template
 
+    Added missing cell comment documentation
+
 0.33 Sun Feb 20 20:07:43 CET 2011
     Implemented the COMMENT argument
 

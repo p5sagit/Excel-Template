@@ -160,6 +160,10 @@ This allows you to specify what write_*() method will be used. The default is to
 
 The legal types (taken from L<Spreadsheet::WriteExcel>) are:
 
+=item * COMMENT
+
+Add a comment to the cell
+
 =over 4
 
 =item * blank
