@@ -58,7 +58,7 @@ Excel::Template::Container
 
 Boolean attributes should be set to 1, 0, true, or false.
 
-Color values can be the color name or the color index. See http://search.cpan.org/~jmcnamara/Spreadsheet-WriteExcel-2.11/lib/Spreadsheet/WriteExcel.pm#COLOURS_IN_EXCEL
+Color values can be the color name or the color index. See L<Spreadsheet::WriteExcel/"COLOURS IN EXCEL">
 
 =over 4
 
@@ -79,7 +79,7 @@ This will set bold to on or off, depending on the boolean value.
 Set the border for all for edges of a cell. Also see bottom, top, left, and right.
 Valid values are 0 - 7. 
 
-http://search.cpan.org/~jmcnamara/Spreadsheet-WriteExcel-2.11/lib/Spreadsheet/WriteExcel.pm#set_border()
+See L<Spreadsheet::WriteExcel/"set_border()">
 
 =item * border_color
 
@@ -146,7 +146,7 @@ See border_color.
 
 =item * num_format
 
-Set to the index of one of Excel's built-in number formats. See http://search.cpan.org/~jmcnamara/Spreadsheet-WriteExcel-2.11/lib/Spreadsheet/WriteExcel.pm#set_num_format()
+Set to the index of one of Excel's built-in number formats. See L<Spreadsheet::WriteExcel/"set_num_format()"> 
 
 =item * pattern
 

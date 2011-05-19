@@ -1,5 +1,6 @@
 Revision history for Perl distribution Excel::Template
 
+    Made Spreadsheet::WriteExcel links in format docs more generic (Nigel Metheringham)
     Added missing cell comment documentation
 
 0.33 Sun Feb 20 20:07:43 CET 2011
