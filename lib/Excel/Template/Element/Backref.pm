@@ -28,7 +28,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Element::Backref
+Excel::Template::Element::Backref - Excel::Template::Element::Backref
 
 =head1 PURPOSE
 

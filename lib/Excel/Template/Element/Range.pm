@@ -52,7 +52,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Element::Range
+Excel::Template::Element::Range - Excel::Template::Element::Range
 
 =head1 PURPOSE
 

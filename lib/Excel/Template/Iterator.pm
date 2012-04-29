@@ -196,7 +196,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Iterator
+Excel::Template::Iterator - Excel::Template::Iterator
 
 =head1 PURPOSE
 

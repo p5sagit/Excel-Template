@@ -166,7 +166,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Factory
+Excel::Template::Factory - Excel::Template::Factory
 
 =head1 PURPOSE
 

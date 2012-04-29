@@ -17,7 +17,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Container::Scope
+Excel::Template::Container::Scope - Excel::Template::Container::Scope
 
 =head1 PURPOSE
 

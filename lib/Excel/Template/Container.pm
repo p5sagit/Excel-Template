@@ -124,7 +124,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Container
+Excel::Template::Container - Excel::Template::Container
 
 =head1 PURPOSE
 

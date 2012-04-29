@@ -125,7 +125,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Container::Loop
+Excel::Template::Container::Loop - Excel::Template::Container::Loop
 
 =head1 PURPOSE
 

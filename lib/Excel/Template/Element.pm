@@ -14,7 +14,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Element
+Excel::Template::Element - Excel::Template::Element
 
 =head1 PURPOSE
 

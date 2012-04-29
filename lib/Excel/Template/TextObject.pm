@@ -63,7 +63,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::TextObject
+Excel::Template::TextObject - Excel::Template::TextObject
 
 =head1 PURPOSE
 

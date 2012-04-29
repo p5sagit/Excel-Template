@@ -308,7 +308,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Context
+Excel::Template::Context - Excel::Template::Context
 
 =head1 PURPOSE
 

@@ -16,7 +16,7 @@ __END__
 
 =head1 NAME
 
-Excel::Template::Element::Var
+Excel::Template::Element::Var - Excel::Template::Element::Var
 
 =head1 PURPOSE
 
