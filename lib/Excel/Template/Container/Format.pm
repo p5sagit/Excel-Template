@@ -181,7 +181,7 @@ A boolean value to justify the last line. Only applies to Far Eastern versions o
 =item * text_wrap
 
 A boolean value. When set to true, text will wrap in a cell instead of crossing over
-into empty cells. If the row height is not set, the row will grow taller to accomodate
+into empty cells. If the row height is not set, the row will grow taller to accommodate
 the wrapping text.
 
 =item * top
