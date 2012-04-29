@@ -1,5 +1,8 @@
 Revision history for Perl distribution Excel::Template
 
+
+    Behavior of merge_range adjusted, now it works: 
+      <merge_range> Content </ merge_range>. (As described in the POD)
     Merge range formatting tends to collide with non-merged formatting,
       thanks to Nigel Metheringham.
     Fixed some documentation errors, thanks to Robert James Clay.
