@@ -1,5 +1,6 @@
 Revision history for Perl distribution Excel::Template
 
+    Fixed some documentation errors, thanks to Robert James Clay.
     Made Spreadsheet::WriteExcel links in format docs more generic (Nigel Metheringham)
     Added missing cell comment documentation
 
