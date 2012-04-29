@@ -36,6 +36,9 @@ sub render {
         $values{$k} = $context->resolve( $self, $k );
     }
 
+    # force is_merged on here to differentiate the formats
+    $values{is_merged} = 1;
+
     my $format = $context->format_object->copy(
         $context, $old_format, %values,
     );

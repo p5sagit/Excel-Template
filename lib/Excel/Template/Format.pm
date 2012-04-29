@@ -56,6 +56,9 @@ sub _retrieve_key { $_[0]{ $_[1] } }
         my %params = @_;
         $params{lc $_} = delete $params{$_} for keys %params;
 
+        # force fake slots to be zero if not set
+        $params{$_} ||= 0 for @_fake_slots;
+
         my @parts = (
             (map { $params{$_} ? 1 : '' } @_boolean_formats),
             (map { $params{$_} ? $params{$_} + 0 : '' } @_integer_formats),
