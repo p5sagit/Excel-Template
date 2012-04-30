@@ -91,7 +91,7 @@ This activates the HIDDEN and LOCKED nodes.
 This will change the behavior of the worksheet to preserve leading zeros.
 
 
-=item * HIDE_GRIDLINE
+=item * HIDE_GRIDLINES
 
 his method is used to hide the gridlines on the screen and printed page. 
 Gridlines are the lines that divide the cells on a worksheet. Screen and printed gridlines are 
